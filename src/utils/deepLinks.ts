@@ -426,7 +426,7 @@ export function getDeepLinks(
 					regex: /^navigation\/games$/i,
 				},
 			],
-			toWebsiteUrl: "charts",
+			toWebsiteUrl: "/charts",
 			toProtocolUrl: "navigation/charts",
 		} satisfies DeepLink<"charts">,
 		/*
