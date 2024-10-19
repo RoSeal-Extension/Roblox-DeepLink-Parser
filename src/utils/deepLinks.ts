@@ -429,6 +429,7 @@ export function getDeepLinks(
 			toWebsiteUrl: "charts",
 			toProtocolUrl: "navigation/charts",
 		} satisfies DeepLink<"charts">,
+		/*
 		{
 			name: "sortDetails",
 			protocolUrls: [
@@ -442,7 +443,7 @@ export function getDeepLinks(
 					],
 				},
 			],
-		} satisfies DeepLink<"sortDetails">,
+		} satisfies DeepLink<"sortDetails">,*/
 		{
 			name: "itemDetails",
 			protocolUrls: [
