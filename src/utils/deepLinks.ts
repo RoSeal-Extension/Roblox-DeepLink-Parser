@@ -149,14 +149,20 @@ export function getDeepLinks(
 							name: "articleId",
 							regex: /^\d+$/,
 						},
+						{
+							name: "type",
+							regex:
+								/^(policy_update|parental_controls_launch|spending_settings)$/,
+						},
 					],
 				},
 			],
 			arbitaryParameters: {
 				domain: "protocol",
+				type: "protocol",
 			},
 			toProtocolUrl: "navigation/external_web_link",
-			toWebsiteUrl: `https://en.help.${robloxUrl.replace("www", "en.help")}/hc/{locale}/articles/{params.articleId}`,
+			toWebsiteUrl: `https://en.help.${robloxUrl.replace("www", "en.help")}/hc/{locale}/articles/{articleId}`,
 		} as DeepLink<"externalWebLink", "domain" | "locale" | "articleId">,
 		{
 			name: "chat",
@@ -526,6 +532,8 @@ export function getDeepLinks(
 					tabId = "parental_controls";
 				} else if (hash === "notifications") {
 					tabId = "notification_settings";
+				} else if (hash === "payment-methods") {
+					tabId = "spending_settings";
 				}
 
 				return {
@@ -545,7 +553,7 @@ export function getDeepLinks(
 				} else if (params.tabId === "notification_settings") {
 					url += "#!/notifications";
 				} else if (params.tabId === "spending_settings") {
-					url += "#!/billing";
+					url += "#!/payment-methods";
 				} else {
 					url += "#!/info";
 				}
