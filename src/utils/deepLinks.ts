@@ -700,6 +700,12 @@ export function getDeepLinks(
 							name: "placeId",
 						},
 					],
+					query: [
+						{
+							name: "privateServerLinkCode",
+							regex: /^\d+$/i,
+						}
+					]
 				},
 			],
 			arbitaryParameters: {
