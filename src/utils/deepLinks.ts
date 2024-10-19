@@ -152,9 +152,11 @@ export function getDeepLinks(
 					],
 				},
 			],
+			arbitaryParameters: {
+				domain: "protocol"
+			},
 			toProtocolUrl: "navigation/external_web_link",
-			toWebsiteUrl: (params) =>
-				`https://en.help.${robloxUrl.replace("www", "en.help")}/hc/${params.locale}/articles/${params.articleId}`,
+			toWebsiteUrl: `https://en.help.${robloxUrl.replace("www", "en.help")}/hc/{locale}/articles/{params.articleId}`,
 		} satisfies DeepLink<"externalWebLink", "domain" | "locale" | "articleId">,
 		{
 			name: "chat",
@@ -196,7 +198,7 @@ export function getDeepLinks(
 				vid: url.hash.split("/")?.[2],
 			}),
 			toProtocolUrl: "navigation/appeals",
-			toWebsiteUrl: (params) => `/report-appeals#/v/${params.vid}`,
+			toWebsiteUrl: `/report-appeals#/v/{vid}`,
 		} satisfies DeepLink<"appeals", "vid">,
 		{
 			name: "home",
@@ -476,6 +478,9 @@ export function getDeepLinks(
 					],
 				},
 			],
+			arbitaryParameters: {
+				itemType: "protocol"
+			},
 			transformWebsiteParams: (params) => ({
 				itemType:
 					params.pageType.toLowerCase() === "catalog"
@@ -599,6 +604,10 @@ export function getDeepLinks(
 					],
 				},
 			],
+			arbitaryParameters: {
+				itemId: "protocol",
+				itemType: "protocol",
+			},
 			toProtocolUrl: "navigation/qr_code_redemption",
 			toWebsiteUrl: (params) =>
 				`/${params.itemType.toLowerCase() === "asset" ? "catalog" : "bundles"}/${params.itemId}/name`,
