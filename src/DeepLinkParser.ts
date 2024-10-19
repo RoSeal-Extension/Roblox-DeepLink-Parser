@@ -30,7 +30,7 @@ export default class DeepLinkParser<
 		robloxApiDomain: DEFAULT_ROBLOX_API_DOMAIN,
 	};
 	private _fetchFn: typeof fetch = fetch.bind(globalThis);
-	private _deepLinks: T[];
+	public _deepLinks: T[];
 	constructor(data?: DeepLinkParserConstructorProps) {
 		if (data?.urls) {
 			for (const _key in data.urls) {
@@ -163,7 +163,14 @@ export default class DeepLinkParser<
 					params = transformedParams;
 				}
 
-				return new ParsedDeepLink<T>(deepLink, params, this as DeepLinkParser);
+				return new ParsedDeepLink<T>(
+					{
+						type: deepLink.name,
+						params,
+						// biome-ignore lint/suspicious/noExplicitAny: Fine
+					} as any,
+					this as DeepLinkParser,
+				);
 			}
 		}
 
@@ -242,7 +249,14 @@ export default class DeepLinkParser<
 					params = transformedParams;
 				}
 
-				return new ParsedDeepLink<T>(deepLink, params, this as DeepLinkParser);
+				return new ParsedDeepLink<T>(
+					{
+						type: deepLink.name,
+						params,
+						// biome-ignore lint/suspicious/noExplicitAny: Fine
+					} as any,
+					this as DeepLinkParser,
+				);
 			}
 		}
 

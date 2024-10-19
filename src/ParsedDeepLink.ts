@@ -2,30 +2,30 @@ import type DeepLinkParser from "./DeepLinkParser";
 import type { DeepLink } from "./utils/deepLinks";
 
 export type ExtractParameterType<T> = T extends DeepLink<
-infer U,
+	infer U,
 	infer _V,
 	infer _W,
 	infer X
 >
 	? {
-		type: U;
-		params: Record<X, string>;
-	}
+			type: U;
+			params: Record<X, string>;
+		}
 	: never;
 
 export default class ParsedDeepLink<
 	T extends DeepLink<string, string, string, string>,
 > {
-	public data: ExtractParameterType<T>;
+	private _deepLink: T;
 	constructor(
-		private _deepLink: T,
-		public params: ExtractParameterType<T>["params"],
+		public data: ExtractParameterType<T>,
 		private _deepLinkParser: DeepLinkParser,
 	) {
-		this.data = {
-			type: _deepLink.name,
-			params,
-		} as ExtractParameterType<T>;
+		this._deepLink = (_deepLinkParser._deepLinks.find(
+			(link) => link.name === data.type,
+		) ?? {
+			name: data.type,
+		}) as T;
 	}
 
 	public toProtocolUrl() {
