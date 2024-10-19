@@ -127,7 +127,8 @@ export default class DeepLinkParser<
 							requiredGroups.push(search.required);
 						}
 
-						params[search.name] = value;
+						params["mappedName" in search ? search.mappedName : search.name] =
+							value;
 					}
 				}
 
@@ -145,6 +146,8 @@ export default class DeepLinkParser<
 				return new ParsedDeepLink<T>(deepLink, params, this as DeepLinkParser);
 			}
 		}
+
+		return null;
 	}
 
 	public async parseProtocolLink(url: string) {
