@@ -79,7 +79,7 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "navigation/content_posts",
-		} satisfies DeepLink<"userContentPosts", "userId" | "postId">,
+		} as DeepLink<"userContentPosts", "userId" | "postId">,
 		{
 			name: "resolveShareLink",
 			protocolUrls: [
@@ -114,7 +114,7 @@ export function getDeepLinks(
 			],
 			toProtocolUrl: "navigation/share_links",
 			toWebsiteUrl: "/share-links",
-		} satisfies DeepLink<"resolveShareLink", "type" | "code">,
+		} as DeepLink<"resolveShareLink", "type" | "code">,
 		{
 			name: "giftCards",
 			protocolUrls: [
@@ -129,7 +129,7 @@ export function getDeepLinks(
 			],
 			toProtocolUrl: "navigation/gift_cards",
 			toWebsiteUrl: "/giftcards",
-		} satisfies DeepLink<"giftCards">,
+		} as DeepLink<"giftCards">,
 		{
 			name: "externalWebLink",
 			protocolUrls: [
@@ -157,7 +157,7 @@ export function getDeepLinks(
 			},
 			toProtocolUrl: "navigation/external_web_link",
 			toWebsiteUrl: `https://en.help.${robloxUrl.replace("www", "en.help")}/hc/{locale}/articles/{params.articleId}`,
-		} satisfies DeepLink<"externalWebLink", "domain" | "locale" | "articleId">,
+		} as DeepLink<"externalWebLink", "domain" | "locale" | "articleId">,
 		{
 			name: "chat",
 			protocolUrls: [
@@ -175,7 +175,7 @@ export function getDeepLinks(
 					],
 				},
 			],
-		} satisfies DeepLink<"chat", "userId" | "chatId">,
+		} as DeepLink<"chat", "userId" | "chatId">,
 		{
 			name: "appeals",
 			protocolUrls: [
@@ -199,7 +199,7 @@ export function getDeepLinks(
 			}),
 			toProtocolUrl: "navigation/appeals",
 			toWebsiteUrl: `/report-appeals#/v/{vid}`,
-		} satisfies DeepLink<"appeals", "vid">,
+		} as DeepLink<"appeals", "vid">,
 		{
 			name: "home",
 			protocolUrls: [
@@ -214,7 +214,7 @@ export function getDeepLinks(
 			],
 			toProtocolUrl: "navigation/home",
 			toWebsiteUrl: "/home",
-		} satisfies DeepLink<"home">,
+		} as DeepLink<"home">,
 		{
 			name: "experienceEventDetails",
 			protocolUrls: [
@@ -241,7 +241,7 @@ export function getDeepLinks(
 			],
 			toProtocolUrl: "navigation/event_details",
 			toWebsiteUrl: "/events/{eventId}",
-		} satisfies DeepLink<"experienceEventDetails", "eventId">,
+		} as DeepLink<"experienceEventDetails", "eventId">,
 		{
 			name: "crossDeviceLogin",
 			protocolUrls: [
@@ -259,7 +259,7 @@ export function getDeepLinks(
 			},
 			toProtocolUrl: "navigation/crossdevice",
 			toWebsiteUrl: "/crossdevicelogin/ConfirmCode",
-		} satisfies DeepLink<"crossDeviceLogin", "code">,
+		} as DeepLink<"crossDeviceLogin", "code">,
 		{
 			name: "contacts",
 			protocolUrls: [
@@ -281,7 +281,7 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "navigation/contacts",
-		} satisfies DeepLink<
+		} as DeepLink<
 			"contacts",
 			"contactId" | "assetId" | "avatarImageUrl"
 		>,
@@ -293,7 +293,7 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "navigation/avatar_clothing_sort",
-		} satisfies DeepLink<"avatarClothingSort">,
+		} as DeepLink<"avatarClothingSort">,
 		{
 			name: "avatarProfilePictureEditor",
 			protocolUrls: [
@@ -302,7 +302,7 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "navigation/avatar_profile_picture_editor",
-		} satisfies DeepLink<"avatarProfilePictureEditor">,
+		} as DeepLink<"avatarProfilePictureEditor">,
 		{
 			name: "avatarMarketplace",
 			protocolUrls: [
@@ -317,7 +317,7 @@ export function getDeepLinks(
 			],
 			toWebsiteUrl: "/catalog",
 			toProtocolUrl: "navigation/catalog",
-		} satisfies DeepLink<"avatarMarketplace">,
+		} as DeepLink<"avatarMarketplace">,
 		{
 			name: "userFriends",
 			protocolUrls: [
@@ -327,7 +327,7 @@ export function getDeepLinks(
 			],
 			toWebsiteUrl: "/users/friends",
 			toProtocolUrl: "navigation/friends",
-		} satisfies DeepLink<"userFriends">,
+		} as DeepLink<"userFriends">,
 		{
 			name: "avatarCustomization",
 			protocolUrls: [
@@ -342,7 +342,7 @@ export function getDeepLinks(
 			],
 			toWebsiteUrl: "/my/avatar",
 			toProtocolUrl: "navigation/avatar",
-		} satisfies DeepLink<"avatarCustomization">,
+		} as DeepLink<"avatarCustomization">,
 		{
 			name: "agentProfile",
 			protocolUrls: [
@@ -407,7 +407,7 @@ export function getDeepLinks(
 					: `/groups/${params.groupId}/name`,
 			toProtocolUrl: (params) =>
 				`navigation/profile${params.isProfileCard && !params.groupId ? "_card" : ""}`,
-		} satisfies DeepLink<
+		} as DeepLink<
 			"agentProfile",
 			"userId" | "isProfileCard" | "groupId",
 			"userId" | "groupId"
@@ -420,7 +420,7 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "navigation/more",
-		} satisfies DeepLink<"navigationMore">,
+		} as DeepLink<"navigationMore">,
 		{
 			name: "charts",
 			protocolUrls: [
@@ -430,7 +430,7 @@ export function getDeepLinks(
 			],
 			toWebsiteUrl: "/charts",
 			toProtocolUrl: "navigation/charts",
-		} satisfies DeepLink<"charts">,
+		} as DeepLink<"charts">,
 		/*
 		{
 			name: "sortDetails",
@@ -445,7 +445,7 @@ export function getDeepLinks(
 					],
 				},
 			],
-		} satisfies DeepLink<"sortDetails">,*/
+		} as DeepLink<"sortDetails">,*/
 		{
 			name: "itemDetails",
 			protocolUrls: [
@@ -479,7 +479,8 @@ export function getDeepLinks(
 				},
 			],
 			arbitaryParameters: {
-				itemType: "protocol"
+				itemType: "protocol",
+				itemId: "protocol"
 			},
 			transformWebsiteParams: (params) => ({
 				itemType:
@@ -493,7 +494,7 @@ export function getDeepLinks(
 			toWebsiteUrl: (params) =>
 				`/${params.itemType.toLowerCase() === "asset" ? "catalog" : params.itemType.toLowerCase() === "look" ? "looks" : "bundles"}/${params.itemId}/name`,
 			toProtocolUrl: "navigation/item_details",
-		} satisfies DeepLink<
+		} as DeepLink<
 			"itemDetails",
 			"itemType" | "itemId",
 			"pageType" | "itemId",
@@ -554,7 +555,7 @@ export function getDeepLinks(
 
 				return url;
 			},
-		} satisfies DeepLink<"settings", "tabId">,
+		} as DeepLink<"settings", "tabId">,
 		{
 			name: "joinUser",
 			protocolUrls: [
@@ -581,7 +582,7 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "experiences/start",
-		} satisfies DeepLink<
+		} as DeepLink<
 			"joinUser",
 			"userId" | "joinAttemptId" | "joinAttemptOrigin" | "browserTrackerId"
 		>,
@@ -611,7 +612,7 @@ export function getDeepLinks(
 			toProtocolUrl: "navigation/qr_code_redemption",
 			toWebsiteUrl: (params) =>
 				`/${params.itemType.toLowerCase() === "asset" ? "catalog" : "bundles"}/${params.itemId}/name`,
-		} satisfies DeepLink<"itemQRCodeRedemption", "itemType" | "itemId">,
+		} as DeepLink<"itemQRCodeRedemption", "itemType" | "itemId">,
 		{
 			name: "joinPlace",
 			protocolUrls: [
@@ -660,7 +661,7 @@ export function getDeepLinks(
 			],
 			toProtocolUrl: "experiences/start",
 			toWebsiteUrl: "/games/start",
-		} satisfies DeepLink<
+		} as DeepLink<
 			"joinPlace",
 			| "placeId"
 			| "gameInstanceId"
@@ -727,7 +728,7 @@ export function getDeepLinks(
 				),
 			toProtocolUrl: "navigation/game_details",
 			toWebsiteUrl: "/games/{placeId}/name",
-		} satisfies DeepLink<
+		} as DeepLink<
 			"experienceDetails",
 			"gameId" | "privateServerLinkCode",
 			"placeId" | "privateServerLinkCode"

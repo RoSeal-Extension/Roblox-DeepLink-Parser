@@ -2,45 +2,55 @@ import type DeepLinkParser from "./DeepLinkParser";
 import type { DeepLink } from "./utils/deepLinks";
 
 export type ExtractParameterType<T> = T extends DeepLink<
-	string,
-	string,
-	string,
+infer U,
+	infer _V,
+	infer _W,
 	infer X
 >
-	? X
+	? {
+		type: U;
+		params: Record<X, string>;
+	}
 	: never;
 
 export default class ParsedDeepLink<
 	T extends DeepLink<string, string, string, string>,
 > {
+	public data: ExtractParameterType<T>;
 	constructor(
-		public deepLink: T,
-		public params: Record<ExtractParameterType<T>, string>,
+		private _deepLink: T,
+		public params: ExtractParameterType<T>["params"],
 		private _deepLinkParser: DeepLinkParser,
-	) {}
+	) {
+		this.data = {
+			type: _deepLink.name,
+			params,
+		} as ExtractParameterType<T>;
+	}
 
 	public toProtocolUrl() {
-		if (!this.deepLink.toProtocolUrl) return null;
+		if (!this._deepLink.toProtocolUrl) return null;
 
+		const data = this.data;
 		let path =
-			typeof this.deepLink.toProtocolUrl === "function"
-				? this.deepLink.toProtocolUrl(this.params)
-				: this.deepLink.toProtocolUrl;
+			typeof this._deepLink.toProtocolUrl === "function"
+				? this._deepLink.toProtocolUrl(data.params)
+				: this._deepLink.toProtocolUrl;
 
 		const search = new URLSearchParams();
 
-		for (const param in this.params) {
-			const check = this.deepLink.arbitaryParameters?.[param];
+		for (const param in data.params) {
+			const check = this._deepLink.arbitaryParameters?.[param];
 			if (check && check !== "protocol") continue;
 
 			if (path.includes(`{${param}}`)) {
 				path = path.replace(
 					`{${param}}`,
-					this.params[param as keyof typeof this.params],
+					data.params[param as keyof typeof data.params],
 				);
 				continue;
 			}
-			search.append(param, this.params[param as keyof typeof this.params]);
+			search.append(param, data.params[param as keyof typeof data.params]);
 		}
 
 		const url = new URL(
@@ -52,27 +62,28 @@ export default class ParsedDeepLink<
 	}
 
 	public toWebsiteUrl() {
-		if (!this.deepLink.toWebsiteUrl) return null;
+		if (!this._deepLink.toWebsiteUrl) return null;
 
+		const data = this.data;
 		let path =
-			typeof this.deepLink.toWebsiteUrl === "function"
-				? this.deepLink.toWebsiteUrl(this.params)
-				: this.deepLink.toWebsiteUrl;
+			typeof this._deepLink.toWebsiteUrl === "function"
+				? this._deepLink.toWebsiteUrl(data.params)
+				: this._deepLink.toWebsiteUrl;
 
 		const search = new URLSearchParams();
 
-		for (const param in this.params) {
-			const check = this.deepLink.arbitaryParameters?.[param];
+		for (const param in data.params) {
+			const check = this._deepLink.arbitaryParameters?.[param];
 			if (check && check !== "website") continue;
 
 			if (path.includes(`{${param}}`)) {
 				path = path.replace(
 					`{${param}}`,
-					this.params[param as keyof typeof this.params],
+					data.params[param as keyof typeof data.params],
 				);
 				continue;
 			}
-			search.append(param, this.params[param as keyof typeof this.params]);
+			search.append(param, data.params[param as keyof typeof data.params]);
 		}
 
 		const url = new URL(

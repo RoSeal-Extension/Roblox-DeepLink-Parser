@@ -4,7 +4,7 @@ Parse Roblox deeplinks, website links, and appsflyer links to get params and get
 ## Example
 ```ts
 import DeepLinkParser from "@roseal/roblox-deeplink-parser";
-const parser = new DeepLinkParser({});
+const parser = new DeepLinkParser();
 
 // same as parser.parseWebsiteLink
 parser.parseLink("https://www.roblox.com/my/avatar").then((link) => {
