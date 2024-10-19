@@ -404,7 +404,7 @@ export function getDeepLinks(
 					? `/users/${params.userId}/profile`
 					: `/groups/${params.groupId}/name`,
 			toProtocolUrl: (params) =>
-				`navigation/profile${params.isProfileCard !== null && params.groupId === null ? "_card" : ""}`,
+				`navigation/profile${params.isProfileCard && !params.groupId ? "_card" : ""}`,
 		} satisfies DeepLink<
 			"agentProfile",
 			"userId" | "isProfileCard" | "groupId",
