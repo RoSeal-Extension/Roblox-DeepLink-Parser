@@ -4,6 +4,7 @@ import {
 	DEFAULT_ROBLOX_PROTOCOL,
 	DEFAULT_ROBLOX_WEBSITE_URL,
 	DEFAULT_ROBLOX_API_DOMAIN,
+	LOCALE_REGEX,
 } from "./utils/constants";
 import { getDeepLinks, type DeepLink } from "./utils/deepLinks";
 
@@ -83,7 +84,26 @@ export default class DeepLinkParser<
 
 	public async parseWebsiteLink(url: string) {
 		const urlObj = new URL(url);
-		const pathName = urlObj.pathname;
+		let pathName = urlObj.pathname
+			.replace(/([^:]\/)\/+/g, "$1")
+			.replace(/\/$/, "");
+
+		try {
+			const split = pathName.split("/");
+			const localeMaybe = split[1];
+			if (
+				localeMaybe &&
+				LOCALE_REGEX.test(localeMaybe) &&
+				!["js", "my"].includes(localeMaybe)
+			) {
+				split.splice(1, 1);
+			}
+
+			pathName = split.join("/");
+		} catch {
+			/* catch error */
+		}
+
 		const searchParams = urlObj.searchParams;
 
 		for (const deepLink of this._deepLinks) {

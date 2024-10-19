@@ -1,4 +1,4 @@
-import { UUID_REGEX } from "./constants";
+import { LOCALE_REGEX, UUID_REGEX } from "./constants";
 
 export type DeepLinkUrlQueryParameter<T extends string> = {
 	regex?: RegExp;
@@ -143,7 +143,7 @@ export function getDeepLinks(
 						},
 						{
 							name: "locale",
-							regex: /^[a-z]{2}(\-[a-z0-9]{2,3})?$/i,
+							regex: LOCALE_REGEX,
 						},
 						{
 							name: "articleId",
@@ -153,7 +153,7 @@ export function getDeepLinks(
 				},
 			],
 			arbitaryParameters: {
-				domain: "protocol"
+				domain: "protocol",
 			},
 			toProtocolUrl: "navigation/external_web_link",
 			toWebsiteUrl: `https://en.help.${robloxUrl.replace("www", "en.help")}/hc/{locale}/articles/{params.articleId}`,
@@ -198,7 +198,7 @@ export function getDeepLinks(
 				vid: url.hash.split("/")?.[2],
 			}),
 			toProtocolUrl: "navigation/appeals",
-			toWebsiteUrl: `/report-appeals#/v/{vid}`,
+			toWebsiteUrl: "/report-appeals#/v/{vid}",
 		} as DeepLink<"appeals", "vid">,
 		{
 			name: "home",
@@ -281,10 +281,7 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "navigation/contacts",
-		} as DeepLink<
-			"contacts",
-			"contactId" | "assetId" | "avatarImageUrl"
-		>,
+		} as DeepLink<"contacts", "contactId" | "assetId" | "avatarImageUrl">,
 		{
 			name: "avatarClothingSort",
 			protocolUrls: [
@@ -480,7 +477,7 @@ export function getDeepLinks(
 			],
 			arbitaryParameters: {
 				itemType: "protocol",
-				itemId: "protocol"
+				itemId: "protocol",
 			},
 			transformWebsiteParams: (params) => ({
 				itemType:
@@ -704,8 +701,8 @@ export function getDeepLinks(
 						{
 							name: "privateServerLinkCode",
 							regex: /^\d+$/i,
-						}
-					]
+						},
+					],
 				},
 			],
 			arbitaryParameters: {
