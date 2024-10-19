@@ -661,6 +661,13 @@ export function getDeepLinks(
 							name: "browserTrackerId",
 							regex: /^\d+$/,
 						},
+						{
+							name: "referralPage",
+						},
+						{
+							name: "referredByPlayerId",
+							regex: /^\d+$/,
+						},
 					],
 				},
 			],
@@ -678,6 +685,8 @@ export function getDeepLinks(
 			| "reservedServerAccessCode"
 			| "callId"
 			| "browserTrackerId"
+			| "referralPage"
+			| "referredByPlayerId"
 		>,
 		{
 			name: "experienceDetails",
