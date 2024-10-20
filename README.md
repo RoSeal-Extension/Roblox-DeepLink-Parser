@@ -41,9 +41,9 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/crossdevice` <br />Search Parameters:<br />- code | `www.roblox.com/crossdevicelogin/confirmcode` | Open crossdevice login page, and automatically enter the code if there was one in the deeplink
 | `roblox://navigation/contacts` <br />Search Parameters:<br />- contactId<br />- assetId<br />- avatarImageUrl | N/A | Open contacts page (or friend requests page)
 | `roblox://navigation/avatar_clothing_sort` | N/A | Open avatar clothing sorting page
-| `roblox://navigation/avatar_profile_picture_editor` | `N/A` | Open avatar profile picture editor page
+| `roblox://navigation/avatar_profile_picture_editor` | N/A | Open avatar profile picture editor page
 | `roblox://navigation/catalog` | `www.roblox.com/catalog` | Open avatar marketplace page
-| `roblox://navigation/catalog/equip` <br />Search Parameters: ? | `N/A` | Supposedly equip an avatar item
+| `roblox://navigation/catalog/equip` <br />Search Parameters: ? | N/A | Supposedly equip an avatar item
 | `roblox://navigation/friends` | `www.roblox.com/users/friends` | View the currently authenticated user's friends
 | `roblox://navigation/avatar` | `www.roblox.com/my/avatar` | Open the avatar editor page
 | `roblox://navigation/more` | N/A | Open the More section of the app
