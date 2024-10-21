@@ -99,7 +99,7 @@ export function getDeepLinks(
 			],
 			websiteUrls: [
 				{
-					regex: /^\/share-links$/i,
+					regex: /^\/share(-links)?$/i,
 					query: [
 						{
 							name: "code",
