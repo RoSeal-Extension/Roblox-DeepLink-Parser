@@ -1,4 +1,4 @@
-import ParsedDeepLink from "./ParsedDeepLink";
+import ParsedDeepLink, { type ExtractParameterType } from "./ParsedDeepLink";
 import {
 	DEFAULT_APPSYFLYER_BASE_URL,
 	DEFAULT_ROBLOX_PROTOCOL,
@@ -61,6 +61,41 @@ export default class DeepLinkParser<
 		)
 			.then((res) => res.json())
 			.then((res) => res?.data?.[0]?.rootPlaceId ?? null);
+	}
+
+	public createDeepLink<U extends T["name"]>(
+		type: U,
+		params: ExtractParameterType<
+			Extract<
+				T,
+				{
+					name: U;
+				}
+			>
+		>["params"],
+	): ParsedDeepLink<
+		Extract<
+			T,
+			{
+				name: U;
+			}
+		>
+	> {
+		return new ParsedDeepLink<
+			Extract<
+				T,
+				{
+					name: U;
+				}
+			>
+		>(
+			{
+				type,
+				params,
+				// biome-ignore lint/suspicious/noExplicitAny: Fine
+			} as any,
+			this as DeepLinkParser,
+		);
 	}
 
 	public async parseAppsFlyerLink(url: string) {
