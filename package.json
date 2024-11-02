@@ -5,7 +5,6 @@
 	"main": "src/DeepLinkParser.ts",
 	"module": "src/DeepLinkParser.ts",
 	"types": "src/DeepLinkParser.ts",
-	"files": ["dist/**/*"],
 	"type": "module",
 	"devDependencies": {
 		"@types/bun": "latest"
