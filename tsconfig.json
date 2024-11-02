@@ -9,8 +9,8 @@
 		"allowJs": true,
 
 		"declaration": true,
-		"declarationDir": "out/types",
-		"outDir": "out",
+		"declarationDir": "dist/types",
+		"outDir": "dist",
 
 		// Best practices
 		"strict": true,
