@@ -35,7 +35,7 @@ export default class DeepLinkParser<
 		if (data?.urls) {
 			for (const _key in data.urls) {
 				const key = _key as keyof DeepLinkParserUrls;
-				if (data.urls[key]) this._urls[key] = data.urls[key];
+				if (data.urls[key]) this._urls[key] = data.urls[key] as string;
 			}
 		}
 
