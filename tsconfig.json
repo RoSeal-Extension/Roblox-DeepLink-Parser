@@ -8,8 +8,7 @@
 		"jsx": "react-jsx",
 		"allowJs": true,
 
-		// Bundler mode
-		"noEmit": true,
+		"outDir": "out",
 
 		// Best practices
 		"strict": true,
