@@ -3,7 +3,6 @@
 	"private": false,
 	"version": "0.1.5",
 	"main": "dist/DeepLinkParser.js",
-	"module": "dist/DeepLinkParser.js",
 	"types": "dist/types/DeepLinkParser.d.ts",
 	"files": ["dist/**/*"],
 	"type": "module",
