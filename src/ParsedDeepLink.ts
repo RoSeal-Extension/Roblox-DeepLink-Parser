@@ -28,7 +28,7 @@ export default class ParsedDeepLink<
 		}) as T;
 	}
 
-	public toProtocolUrl() {
+	public toProtocolUrl(): string | null {
 		if (!this._deepLink.toProtocolUrl) return null;
 
 		const data = this.data;
@@ -61,7 +61,7 @@ export default class ParsedDeepLink<
 		return url.toString();
 	}
 
-	public toWebsiteUrl() {
+	public toWebsiteUrl(): string | null {
 		if (!this._deepLink.toWebsiteUrl) return null;
 
 		const data = this.data;
@@ -94,7 +94,7 @@ export default class ParsedDeepLink<
 		return url.toString();
 	}
 
-	public toAppsFlyerUrl() {
+	public toAppsFlyerUrl(): string | null {
 		const deepLinkMobile = this.toProtocolUrl();
 		const deepLinkWeb = this.toWebsiteUrl();
 

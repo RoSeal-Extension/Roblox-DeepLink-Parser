@@ -2,8 +2,9 @@
 	"name": "@roseal/roblox-deeplink-parser",
 	"private": false,
 	"version": "0.1.5",
-	"main": "dist/DeepLinkParser.js",
-	"types": "dist/types/DeepLinkParser.d.ts",
+	"main": "src/DeepLinkParser.ts",
+	"module": "src/DeepLinkParser.ts",
+	"types": "src/DeepLinkParser.ts",
 	"files": ["dist/**/*"],
 	"type": "module",
 	"devDependencies": {

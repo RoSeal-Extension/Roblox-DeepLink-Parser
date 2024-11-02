@@ -51,9 +51,12 @@ export type DeepLink<
 missing:
 roblox://navigation/catalog/equip
 roblox://navigation/sort?sortName=Discover
+roblox://navigation/experience_sort
+roblox://navigation/security_alert
 ... need to figure out how they work
 */
 
+// we need a specific return type...
 export function getDeepLinks(
 	getUniverseRootPlaceId: (universeId: number) => Promise<number | null>,
 	getPlaceUniverseId: (placeId: number) => Promise<number | null>,

@@ -98,7 +98,9 @@ export default class DeepLinkParser<
 		);
 	}
 
-	public async parseAppsFlyerLink(url: string) {
+	public async parseAppsFlyerLink(
+		url: string,
+	): Promise<ParsedDeepLink<T> | null> {
 		if (!url.startsWith(`https://${this._urls.appsFlyerBaseUrl}`)) {
 			return null;
 		}
@@ -106,6 +108,8 @@ export default class DeepLinkParser<
 
 		const deepLinkMobile = urlObj.searchParams.get("af_dp");
 		const deepLinkWeb = urlObj.searchParams.get("af_web_dp");
+
+		// prioritize mobile over web
 		if (deepLinkMobile) {
 			return this.parseProtocolLink(deepLinkMobile);
 		}
@@ -117,7 +121,9 @@ export default class DeepLinkParser<
 		return null;
 	}
 
-	public async parseWebsiteLink(url: string) {
+	public async parseWebsiteLink(
+		url: string,
+	): Promise<ParsedDeepLink<T> | null> {
 		const urlObj = new URL(url);
 		let pathName = urlObj.pathname
 			.replace(/([^:]\/)\/+/g, "$1")
@@ -212,7 +218,9 @@ export default class DeepLinkParser<
 		return null;
 	}
 
-	public async parseProtocolLink(url: string) {
+	public async parseProtocolLink(
+		url: string,
+	): Promise<ParsedDeepLink<T> | null> {
 		const prepend = `${this._urls.robloxProtocol}://`;
 		const urlObj = new URL(url.replace(prepend, `${prepend}/`));
 		if (urlObj.protocol !== `${this._urls.robloxProtocol}:`) {
@@ -298,7 +306,7 @@ export default class DeepLinkParser<
 		return null;
 	}
 
-	public parseLink(url: string) {
+	public parseLink(url: string): Promise<ParsedDeepLink<T> | null> {
 		if (url.startsWith(`https://${this._urls.appsFlyerBaseUrl}`)) {
 			return this.parseAppsFlyerLink(url);
 		}
