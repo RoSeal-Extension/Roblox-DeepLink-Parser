@@ -8,6 +8,8 @@
 		"jsx": "react-jsx",
 		"allowJs": true,
 
+		"declaration": true,
+		"declarationDir": "out/types",
 		"outDir": "out",
 
 		// Best practices
