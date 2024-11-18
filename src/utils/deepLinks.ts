@@ -56,7 +56,7 @@ roblox://navigation/security_alert
 ... need to figure out how they work
 */
 
-// we need a specific return type...
+// we need a specific return type... so we need slow types
 export function getDeepLinks(
 	getUniverseRootPlaceId: (universeId: number) => Promise<number | null>,
 	getPlaceUniverseId: (placeId: number) => Promise<number | null>,
