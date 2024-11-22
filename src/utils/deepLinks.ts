@@ -393,7 +393,7 @@ export function getDeepLinks(
 					],
 				},
 				{
-					regex: /^\/groups\/(?<groupId>\d+)/i,
+					regex: /^\/(groups|communities)\/(?<groupId>\d+)/i,
 					path: [
 						{
 							name: "groupId",
@@ -410,7 +410,7 @@ export function getDeepLinks(
 			toWebsiteUrl: (params) =>
 				params.userId
 					? `/users/${params.userId}/profile`
-					: `/groups/${params.groupId}/name`,
+					: `/communities/${params.groupId}/name`,
 			toProtocolUrl: (params) =>
 				`navigation/profile${params.isProfileCard && !params.groupId ? "_card" : ""}`,
 		} as DeepLink<
