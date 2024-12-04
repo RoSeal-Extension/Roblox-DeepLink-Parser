@@ -9,13 +9,11 @@ export type ExtractParameterType<T> = T extends DeepLink<
 >
 	? {
 			type: U;
-			params: Record<X, string>;
+			params: X;
 		}
 	: never;
 
-export default class ParsedDeepLink<
-	T extends DeepLink<string, string, string, string>,
-> {
+export default class ParsedDeepLink<T extends DeepLink<string>> {
 	private _deepLink: T;
 	constructor(
 		public data: ExtractParameterType<T>,

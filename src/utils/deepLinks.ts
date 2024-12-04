@@ -1,6 +1,6 @@
 import { LOCALE_REGEX, UUID_REGEX } from "./constants";
 
-export type DeepLinkUrlQueryParameter<T extends string> = {
+export type DeepLinkUrlQueryParameter<T extends string | number | symbol> = {
 	regex?: RegExp;
 	required?: boolean | string;
 } & (
@@ -13,38 +13,36 @@ export type DeepLinkUrlQueryParameter<T extends string> = {
 	  }
 );
 
-export type DeepLinkUrlPathParameter<T extends string> = {
+export type DeepLinkUrlPathParameter<T extends string | number | symbol> = {
 	name: T;
 };
 
-export type DeepLinkUrl<T extends string> = {
+export type DeepLinkUrl<T extends Record<string, unknown>> = {
 	regex: RegExp;
-	query?: DeepLinkUrlQueryParameter<T>[];
-	path?: DeepLinkUrlPathParameter<T>[];
+	query?: DeepLinkUrlQueryParameter<keyof T>[];
+	path?: DeepLinkUrlPathParameter<keyof T>[];
 };
+
+// biome-ignore lint/complexity/noBannedTypes: fine tbh
+type EmptyObj = {};
 
 export type DeepLink<
 	T extends string,
-	U extends string = string,
-	V extends string = U,
-	W extends string = U | V,
+	U extends Record<string, unknown> = EmptyObj,
+	V extends Record<string, unknown> = EmptyObj,
+	W extends Record<string, unknown> = U,
 > = {
 	name: T;
 	protocolUrls?: DeepLinkUrl<U>[];
 	websiteUrls?: DeepLinkUrl<V>[];
-	transformProtocolParams?: (
-		params: Record<U, string>,
-	) => Record<W, string> | Promise<Record<W, string> | undefined>;
-	transformWebsiteParams?: (
-		params: Record<V, string>,
-		url: URL,
-	) => Record<W, string> | Promise<Record<W, string> | undefined>;
+	transformProtocolParams?: (params: U) => W | Promise<W | undefined>;
+	transformWebsiteParams?: (params: V, url: URL) => W | Promise<W | undefined>;
 	arbitaryParameters?: Record<
 		string,
 		boolean | "protocol" | "website" | undefined
 	>;
-	toProtocolUrl?: ((params: Record<W, string>) => string) | string;
-	toWebsiteUrl?: ((params: Record<W, string>) => string) | string;
+	toProtocolUrl?: ((params: W) => string) | string;
+	toWebsiteUrl?: ((params: W) => string) | string;
 };
 
 /*
@@ -82,7 +80,18 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "navigation/content_posts",
-		} as DeepLink<"userContentPosts", "userId" | "postId">,
+		} as DeepLink<
+			"userContentPosts",
+			{
+				userId: string;
+				postId: string;
+			},
+			EmptyObj,
+			{
+				userId: string;
+				postId: string;
+			}
+		>,
 		{
 			name: "resolveShareLink",
 			protocolUrls: [
@@ -117,7 +126,13 @@ export function getDeepLinks(
 			],
 			toProtocolUrl: "navigation/share_links",
 			toWebsiteUrl: "/share-links",
-		} as DeepLink<"resolveShareLink", "type" | "code">,
+		} as DeepLink<
+			"resolveShareLink",
+			{
+				type: string;
+				code: string;
+			}
+		>,
 		{
 			name: "giftCards",
 			protocolUrls: [
@@ -166,7 +181,15 @@ export function getDeepLinks(
 			},
 			toProtocolUrl: "navigation/external_web_link",
 			toWebsiteUrl: `https://en.help.${robloxUrl.replace("www", "en.help")}/hc/{locale}/articles/{articleId}`,
-		} as DeepLink<"externalWebLink", "domain" | "locale" | "articleId">,
+		} as DeepLink<
+			"externalWebLink",
+			{
+				domain: string;
+				locale: string;
+				articleId: string;
+				type: string;
+			}
+		>,
 		{
 			name: "chat",
 			protocolUrls: [
@@ -184,7 +207,13 @@ export function getDeepLinks(
 					],
 				},
 			],
-		} as DeepLink<"chat", "userId" | "chatId">,
+		} as DeepLink<
+			"chat",
+			{
+				userId?: string;
+				chatId?: string;
+			}
+		>,
 		{
 			name: "appeals",
 			protocolUrls: [
@@ -208,7 +237,15 @@ export function getDeepLinks(
 			}),
 			toProtocolUrl: "navigation/appeals",
 			toWebsiteUrl: "/report-appeals#/v/{vid}",
-		} as DeepLink<"appeals", "vid">,
+		} as DeepLink<
+			"appeals",
+			{
+				vid?: string;
+			},
+			{
+				vid?: string;
+			}
+		>,
 		{
 			name: "home",
 			protocolUrls: [
@@ -250,7 +287,12 @@ export function getDeepLinks(
 			],
 			toProtocolUrl: "navigation/event_details",
 			toWebsiteUrl: "/events/{eventId}",
-		} as DeepLink<"experienceEventDetails", "eventId">,
+		} as DeepLink<
+			"experienceEventDetails",
+			{
+				eventId: string;
+			}
+		>,
 		{
 			name: "crossDeviceLogin",
 			protocolUrls: [
@@ -268,7 +310,16 @@ export function getDeepLinks(
 			},
 			toProtocolUrl: "navigation/crossdevice",
 			toWebsiteUrl: "/crossdevicelogin/ConfirmCode",
-		} as DeepLink<"crossDeviceLogin", "code">,
+		} as DeepLink<
+			"crossDeviceLogin",
+			{
+				code?: string;
+			},
+			EmptyObj,
+			{
+				code?: string;
+			}
+		>,
 		{
 			name: "contacts",
 			protocolUrls: [
@@ -290,7 +341,14 @@ export function getDeepLinks(
 				},
 			],
 			toProtocolUrl: "navigation/contacts",
-		} as DeepLink<"contacts", "contactId" | "assetId" | "avatarImageUrl">,
+		} as DeepLink<
+			"contacts",
+			{
+				contactId?: string;
+				assetId?: string;
+				avatarImageUrl?: string;
+			}
+		>,
 		{
 			name: "avatarClothingSort",
 			protocolUrls: [
@@ -407,16 +465,38 @@ export function getDeepLinks(
 				groupId: "protocol",
 				id: "protocol",
 			},
+			// @ts-expect-error: Fix later
 			toWebsiteUrl: (params) =>
 				params.userId
 					? `/users/${params.userId}/profile`
 					: `/communities/${params.groupId}/name`,
+			// @ts-expect-error: Fix later
 			toProtocolUrl: (params) =>
 				`navigation/profile${params.isProfileCard && !params.groupId ? "_card" : ""}`,
-		} as DeepLink<
+		} as unknown as DeepLink<
 			"agentProfile",
-			"userId" | "isProfileCard" | "groupId",
-			"userId" | "groupId"
+			| {
+					userId: string;
+					isProfileCard?: string;
+			  }
+			| {
+					groupId: string;
+			  }
+			| {
+					id: string;
+			  },
+			| {
+					userId: string;
+			  }
+			| {
+					groupId: string;
+			  },
+			| {
+					userId: string;
+			  }
+			| {
+					groupId: string;
+			  }
 		>,
 		{
 			name: "navigationMore",
@@ -502,9 +582,14 @@ export function getDeepLinks(
 			toProtocolUrl: "navigation/item_details",
 		} as DeepLink<
 			"itemDetails",
-			"itemType" | "itemId",
-			"pageType" | "itemId",
-			"itemType" | "itemId"
+			{
+				itemType: string;
+				itemId: string;
+			},
+			{
+				pageType: string;
+				itemId: string;
+			}
 		>,
 		{
 			name: "settings",
@@ -563,7 +648,15 @@ export function getDeepLinks(
 
 				return url;
 			},
-		} as DeepLink<"settings", "tabId">,
+		} as DeepLink<
+			"settings",
+			{
+				tabId?: string;
+			},
+			{
+				tabId?: string;
+			}
+		>,
 		{
 			name: "joinUser",
 			protocolUrls: [
@@ -592,7 +685,12 @@ export function getDeepLinks(
 			toProtocolUrl: "experiences/start",
 		} as DeepLink<
 			"joinUser",
-			"userId" | "joinAttemptId" | "joinAttemptOrigin" | "browserTrackerId"
+			{
+				userId: string;
+				joinAttemptId?: string;
+				joinAttemptOrigin?: string;
+				browserTrackerId?: string;
+			}
 		>,
 		{
 			name: "itemQRCodeRedemption",
@@ -620,7 +718,13 @@ export function getDeepLinks(
 			toProtocolUrl: "navigation/qr_code_redemption",
 			toWebsiteUrl: (params) =>
 				`/${params.itemType.toLowerCase() === "asset" ? "catalog" : "bundles"}/${params.itemId}/name`,
-		} as DeepLink<"itemQRCodeRedemption", "itemType" | "itemId">,
+		} as DeepLink<
+			"itemQRCodeRedemption",
+			{
+				itemType: string;
+				itemId: string;
+			}
+		>,
 		{
 			name: "joinPlace",
 			protocolUrls: [
@@ -678,18 +782,34 @@ export function getDeepLinks(
 			toWebsiteUrl: "/games/start",
 		} as DeepLink<
 			"joinPlace",
-			| "placeId"
-			| "gameInstanceId"
-			| "accessCode"
-			| "linkCode"
-			| "launchData"
-			| "joinAttemptId"
-			| "joinAttemptOrigin"
-			| "reservedServerAccessCode"
-			| "callId"
-			| "browserTrackerId"
-			| "referralPage"
-			| "referredByPlayerId"
+			{
+				placeId: string;
+				gameInstanceId?: string;
+				accessCode?: string;
+				linkCode?: string;
+				launchData?: string;
+				joinAttemptId?: string;
+				joinAttemptOrigin?: string;
+				reservedServerAccessCode?: string;
+				callId?: string;
+				browserTrackerId?: string;
+				referralPage?: string;
+				referredByPlayerId?: string;
+			},
+			{
+				placeId: string;
+				gameInstanceId?: string;
+				accessCode?: string;
+				linkCode?: string;
+				launchData?: string;
+				joinAttemptId?: string;
+				joinAttemptOrigin?: string;
+				reservedServerAccessCode?: string;
+				callId?: string;
+				browserTrackerId?: string;
+				referralPage?: string;
+				referredByPlayerId?: string;
+			}
 		>,
 		{
 			name: "experienceDetails",
@@ -753,8 +873,19 @@ export function getDeepLinks(
 			toWebsiteUrl: "/games/{placeId}/name",
 		} as DeepLink<
 			"experienceDetails",
-			"gameId" | "privateServerLinkCode",
-			"placeId" | "privateServerLinkCode"
+			{
+				gameId: string;
+				privateServerLinkCode?: string;
+			},
+			{
+				placeId: string;
+				privateServerLinkCode?: string;
+			},
+			{
+				placeId: string;
+				gameId: string;
+				privateServerLinkCode?: string;
+			}
 		>,
 	];
 }

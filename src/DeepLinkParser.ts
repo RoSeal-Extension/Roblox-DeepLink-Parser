@@ -21,7 +21,10 @@ export type DeepLinkParserConstructorProps = {
 };
 
 export default class DeepLinkParser<
-	T extends DeepLink<string> = ReturnType<typeof getDeepLinks>[number],
+	// biome-ignore lint/suspicious/noExplicitAny: A very strange typescript issue
+	T extends DeepLink<string, any, any, any> = ReturnType<
+		typeof getDeepLinks
+	>[number],
 > {
 	public _urls: DeepLinkParserUrls = {
 		appsFlyerBaseUrl: DEFAULT_APPSYFLYER_BASE_URL,
@@ -164,17 +167,20 @@ export default class DeepLinkParser<
 					}
 
 					for (const path of url.path) {
+						// @ts-expect-error: A very strange typescript issue
 						params[path.name] = match.groups?.[path.name];
 					}
 				}
 
 				if (url.query) {
 					for (const search of url.query) {
+						// @ts-expect-error: A very strange typescript issue
 						const value = searchParams.get(search.name);
 						if (!value) {
 							if (
 								search.required === true ||
 								(typeof search.required === "string" &&
+									// @ts-expect-error: A very strange typescript issue
 									!requiredGroups.includes(search.name))
 							) {
 								passing = false;
@@ -188,6 +194,7 @@ export default class DeepLinkParser<
 							requiredGroups.push(search.required);
 						}
 
+						// @ts-expect-error: A very strange typescript issue
 						params["mappedName" in search ? search.mappedName : search.name] =
 							value;
 					}
@@ -254,17 +261,20 @@ export default class DeepLinkParser<
 					}
 
 					for (const path of url.path) {
+						// @ts-expect-error: A very strange typescript issue
 						params[path.name] = match.groups[path.name];
 					}
 				}
 
 				if (url.query) {
 					for (const search of url.query) {
+						// @ts-expect-error: A very strange typescript issue
 						const value = searchParams.get(search.name);
 						if (!value) {
 							if (
 								search.required === true ||
 								(typeof search.required === "string" &&
+									// @ts-expect-error: A very strange typescript issue
 									!requiredGroups.includes(search.name))
 							) {
 								passing = false;
@@ -278,6 +288,7 @@ export default class DeepLinkParser<
 							requiredGroups.push(search.required);
 						}
 
+						// @ts-expect-error: A very strange typescript issue
 						params["mappedName" in search ? search.mappedName : search.name] =
 							value;
 					}
