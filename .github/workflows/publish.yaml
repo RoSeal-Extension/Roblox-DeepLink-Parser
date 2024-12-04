@@ -26,4 +26,4 @@ jobs:
 
       - name: Publish on JSR
         if: github.event_name == 'release' && github.repository == 'RoSeal-Extension/Roblox-DeepLink-Parser'
-        run: bunx jsr publish
+        run: bunx jsr publish --allow-slow-types
