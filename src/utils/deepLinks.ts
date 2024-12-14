@@ -397,6 +397,15 @@ export function getDeepLinks(
 			protocolUrls: [
 				{
 					regex: /^navigation\/avatar$/i,
+					query: [
+						{
+							name: "itemId",
+							regex: /^\d+$/,
+						},
+						{
+							name: "itemType",
+						},
+					],
 				},
 			],
 			websiteUrls: [
@@ -404,9 +413,19 @@ export function getDeepLinks(
 					regex: /^\/my\/avatar$/i,
 				},
 			],
+			arbitaryParameters: {
+				itemType: "protocol",
+				itemId: "protocol",
+			},
 			toWebsiteUrl: "/my/avatar",
 			toProtocolUrl: "navigation/avatar",
-		} as DeepLink<"avatarCustomization">,
+		} as DeepLink<
+			"avatarCustomization",
+			{
+				itemType?: string;
+				itemId?: string;
+			}
+		>,
 		{
 			name: "agentProfile",
 			protocolUrls: [
