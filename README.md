@@ -55,7 +55,7 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/privacy_settings` | `www.roblox.com/my/account#!/privacy` | Open webview of the account settings privacy page
 | `roblox://navigation/parental_controls` | `www.roblox.com/my/account#!/parental-controls` | Open webview of the account settings parental controls page
 | `roblox://navigation/spending_settings` | `www.roblox.com/my/account#!/payment-methods` | Open webview of the account settings payment methods page
-| `roblox://navigation/qr_code_redemption` <br />Search Parameters:<br />- itemType<br />- itemId | N/A | Redeem an item which can be obtained by scanning a QR code
+| `roblox://navigation/qr_code_redemption` <br />Search Parameters:<br />- itemType (Asset|Bundle)<br />- itemId | N/A | Redeem an item which can be obtained by scanning a QR code
 | `roblox://navigation/game_details` <br />Search Parameters:<br />- gameId<br />- privateServerLinkCode | `www.roblox.com/games/{placeId}/name` <br />Search Parameters:<br />- privateServerLinkCode | Opens the details page of an experience
 | `roblox://navigation/experience_sort` <br />Search Parameters: ? | N/A | Supposedly opens an experience sort page
 | `roblox://navigation/security_alert` <br />Search Parameters: ? | N/A | ?
