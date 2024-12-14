@@ -50,7 +50,6 @@ missing:
 roblox://navigation/catalog/equip
 roblox://navigation/sort?sortName=Discover
 roblox://navigation/experience_sort
-roblox://navigation/security_alert
 ... need to figure out how they work
 */
 
@@ -61,6 +60,39 @@ export function getDeepLinks(
 	robloxUrl: string,
 ) {
 	return [
+		{
+			name: "securityFeedback",
+			protocolUrls: [
+				{
+					regex: /^navigation\/security_alert$/i,
+					query: [
+						{
+							name: "payload",
+							required: true,
+						},
+					],
+				},
+				{
+					regex: /^\/security-feedback(-v2)?$/i,
+					query: [
+						{
+							name: "payload",
+							required: true,
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/security_alert",
+			toWebsiteUrl: "/security-feedback",
+		} as DeepLink<
+			"securityFeedback",
+			{
+				payload: string;
+			},
+			{
+				payload: string;
+			}
+		>,
 		{
 			name: "userContentPosts",
 			protocolUrls: [
