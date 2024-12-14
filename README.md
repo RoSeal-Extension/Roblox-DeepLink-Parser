@@ -45,11 +45,11 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/catalog` | `www.roblox.com/catalog` | Open avatar marketplace page
 | `roblox://navigation/catalog/equip` <br />Search Parameters: ? | N/A | Supposedly equip an avatar item
 | `roblox://navigation/friends` | `www.roblox.com/users/friends` | View the currently authenticated user's friends
-| `roblox://navigation/avatar` | `www.roblox.com/my/avatar` | Open the avatar editor page
+| `roblox://navigation/avatar` <br />Search Parameters:<br />- itemType (Character)<br />- itemId | `www.roblox.com/my/avatar` | Open the avatar editor page
 | `roblox://navigation/more` | N/A | Open the More section of the app
 | `roblox://navigation/games` | `www.roblox.com/charts` | Open the charts page
 | `roblox://navigation/sort` <br />Search Parameters:<br />- sortName | `www.roblox.com/charts#/sortName/{sortId}` | Open the charts sort page
-| `roblox://navigation/item_details` <br />Search Parameters:<br />- itemType<br />- itemId | `www.roblox.com/catalog/{itemId}/name`, `www.roblox.com/bundles/{itemId}/name`, or `www.roblox.com/looks/{itemId}/name` | Open the details page of an avatar asset, bundle, or look
+| `roblox://navigation/item_details` <br />Search Parameters:<br />- itemType (Look|Asset|Bundle)<br />- itemId | `www.roblox.com/catalog/{itemId}/name`, `www.roblox.com/bundles/{itemId}/name`, or `www.roblox.com/looks/{itemId}/name` | Open the details page of an avatar asset, bundle, or look
 | `roblox://navigation/account_info` | `www.roblox.com/my/account#!/info` | Open webview of the account settings info page
 | `roblox://navigation/notification_settings` | `www.roblox.com/my/account#!/notifications` | Open webview of the account settings notifications page
 | `roblox://navigation/privacy_settings` | `www.roblox.com/my/account#!/privacy` | Open webview of the account settings privacy page
