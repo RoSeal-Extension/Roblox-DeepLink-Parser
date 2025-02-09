@@ -826,6 +826,13 @@ export function getDeepLinks(
 							name: "referredByPlayerId",
 							regex: /^\d+$/,
 						},
+						{
+							name: "eventId",
+							regex: /\d+$/,
+						},
+						{
+							name: "isoContext"
+						},
 					],
 				},
 			],
