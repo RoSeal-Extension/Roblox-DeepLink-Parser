@@ -236,6 +236,9 @@ export function getDeepLinks(
 							name: "chatId",
 							regex: UUID_REGEX,
 						},
+						{
+							name: "entryPoint",
+						},
 					],
 				},
 			],
@@ -244,6 +247,7 @@ export function getDeepLinks(
 			{
 				userId?: string;
 				chatId?: string;
+				entryPoint?: string;
 			}
 		>,
 		{
@@ -500,6 +504,11 @@ export function getDeepLinks(
 					],
 				},
 			],
+			arbitaryParameters: {
+				forumCategoryId: true,
+				forumPostId: true,
+				forumCommentId: true,
+			},
 			transformWebsiteParams: (data, url) => {
 				const hashSearch = url.hash.split("/");
 				if (hashSearch[1] !== "forums") {
@@ -548,6 +557,9 @@ export function getDeepLinks(
 							regex: /^\d+$/,
 							required: "primaryParameter",
 						},
+						{
+							name: "friendshipSourceType",
+						},
 					],
 					path: [
 						{
@@ -562,6 +574,9 @@ export function getDeepLinks(
 					path: [
 						{
 							name: "userId",
+						},
+						{
+							name: "friendshipSourceType",
 						},
 					],
 				},
@@ -578,9 +593,11 @@ export function getDeepLinks(
 			{
 				userId: string;
 				isProfileCard?: string;
+				friendshipSourceType?: string;
 			},
 			{
 				userId: string;
+				friendshipSourceType?: string;
 			}
 		>,
 		{
