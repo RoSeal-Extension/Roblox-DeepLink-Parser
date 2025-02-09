@@ -459,7 +459,86 @@ export function getDeepLinks(
 			}
 		>,
 		{
-			name: "agentProfile",
+			name: "communityProfile",
+			protocolUrls: [
+				{
+					regex: /^navigation\/profile$/i,
+					query: [
+						{
+							name: "groupId",
+							required: true,
+						},
+					],
+				},
+				{
+					regex: /^navigation\/group$/i,
+					query: [
+						{
+							name: "groupId",
+							regex: /^\d+$/,
+							required: true,
+						},
+						{
+							name: "forumCategoryId",
+						},
+						{
+							name: "forumPostId",
+						},
+						{
+							name: "forumCommentId",
+						},
+					],
+				},
+			],
+			websiteUrls: [
+				{
+					regex: /^\/(groups|communities)\/(?<groupId>\d+)/i,
+					path: [
+						{
+							name: "groupId",
+						},
+					],
+				},
+			],
+			transformWebsiteParams: (data, url) => {
+				const hashSearch = url.hash.split("/");
+				if (hashSearch[1] !== "forums") {
+					return data;
+				}
+
+				return {
+					groupId: data.groupId,
+					forumCategoryId: hashSearch[2],
+					forumPostId: hashSearch[4],
+					forumCommentId: hashSearch[6],
+				};
+			},
+			toWebsiteUrl: (data) => {
+				let url = `/groups/${data.groupId}`;
+				if (data.forumCategoryId && data.forumPostId && data.forumCommentId) {
+					url += `#!/forums/${data.forumCategoryId}/post/${data.forumPostId}/comment/${data.forumCommentId}`;
+				}
+
+				return url;
+			},
+			toProtocolUrl: "navigation/group",
+		} as DeepLink<
+			"communityProfile",
+			{
+				groupId: string;
+				forumCategoryId?: string;
+				forumPostId?: string;
+				forumCommentId?: string;
+			},
+			{
+				groupId: string;
+				forumCategoryId?: string;
+				forumPostId?: string;
+				forumCommentId?: string;
+			}
+		>,
+		{
+			name: "userProfile",
 			protocolUrls: [
 				{
 					regex: /^navigation\/profile(?<isProfileCard>_card)?$/i,
@@ -469,25 +548,10 @@ export function getDeepLinks(
 							regex: /^\d+$/,
 							required: "primaryParameter",
 						},
-						{
-							name: "groupId",
-							regex: /^\d+$/,
-							required: "primaryParameter",
-						},
 					],
 					path: [
 						{
 							name: "isProfileCard",
-						},
-					],
-				},
-				{
-					regex: /^navigation\/group$/i,
-					query: [
-						{
-							name: "id",
-							mappedName: "groupId",
-							regex: /^\d+$/,
 						},
 					],
 				},
@@ -501,53 +565,23 @@ export function getDeepLinks(
 						},
 					],
 				},
-				{
-					regex: /^\/(groups|communities)\/(?<groupId>\d+)/i,
-					path: [
-						{
-							name: "groupId",
-						},
-					],
-				},
 			],
 			arbitaryParameters: {
 				isProfileCard: "website",
 				userId: "protocol",
-				groupId: "protocol",
-				id: "protocol",
 			},
-			// @ts-expect-error: Fix later
-			toWebsiteUrl: (params) =>
-				params.userId
-					? `/users/${params.userId}/profile`
-					: `/communities/${params.groupId}/name`,
-			// @ts-expect-error: Fix later
+			toWebsiteUrl: "/users/{userId}/profile",
 			toProtocolUrl: (params) =>
-				`navigation/profile${params.isProfileCard && !params.groupId ? "_card" : ""}`,
-		} as unknown as DeepLink<
-			"agentProfile",
-			| {
-					userId: string;
-					isProfileCard?: string;
-			  }
-			| {
-					groupId: string;
-			  }
-			| {
-					id: string;
-			  },
-			| {
-					userId: string;
-			  }
-			| {
-					groupId: string;
-			  },
-			| {
-					userId: string;
-			  }
-			| {
-					groupId: string;
-			  }
+				`navigation/profile${params.isProfileCard ? "_card" : ""}`,
+		} as DeepLink<
+			"userProfile",
+			{
+				userId: string;
+				isProfileCard?: string;
+			},
+			{
+				userId: string;
+			}
 		>,
 		{
 			name: "navigationMore",
@@ -831,7 +865,7 @@ export function getDeepLinks(
 							regex: /\d+$/,
 						},
 						{
-							name: "isoContext"
+							name: "isoContext",
 						},
 					],
 				},
