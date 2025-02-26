@@ -60,3 +60,4 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/game_details` <br />Search Parameters:<br />- gameId<br />- privateServerLinkCode | `www.roblox.com/games/{placeId}/name` <br />Search Parameters:<br />- privateServerLinkCode | Opens the details page of an experience
 | `roblox://navigation/security_alert` <br />Search Parameters:<br />- payload | `www.roblox.com/security-feedback?payload={payload}` | Opens security feedback page
 | `roblox://navigation/experience_sort` <br />Search Parameters: ? | N/A | Supposedly opens an experience sort page
+| `roblox://navigation/party` | N/A | Supposedly open the party page
