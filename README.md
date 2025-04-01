@@ -44,7 +44,7 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/avatar_clothing_sort` | N/A | Open avatar clothing sorting page
 | `roblox://navigation/avatar_profile_picture_editor` | N/A | Open avatar profile picture editor page
 | `roblox://navigation/catalog` | `www.roblox.com/catalog` | Open avatar marketplace page
-| `roblox://navigation/catalog/equip` <br />Search Parameters: ? | N/A | Supposedly equip an avatar item
+| `roblox://navigation/catalog/equip` <br />Search Parameters:<br />- itemId<br />- itemType (Asset|Bundle) | N/A | Equip or try on an avatar item
 | `roblox://navigation/friends` | `www.roblox.com/users/friends` | View the currently authenticated user's friends
 | `roblox://navigation/avatar` <br />Search Parameters:<br />- itemType (Character)<br />- itemId | `www.roblox.com/my/avatar` | Open the avatar editor page
 | `roblox://navigation/more` | N/A | Open the More section of the app
@@ -59,5 +59,5 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/qr_code_redemption` <br />Search Parameters:<br />- itemType (Asset|Bundle)<br />- itemId | N/A | Redeem an item which can be obtained by scanning a QR code
 | `roblox://navigation/game_details` <br />Search Parameters:<br />- gameId<br />- privateServerLinkCode | `www.roblox.com/games/{placeId}/name` <br />Search Parameters:<br />- privateServerLinkCode | Opens the details page of an experience
 | `roblox://navigation/security_alert` <br />Search Parameters:<br />- payload | `www.roblox.com/security-feedback?payload={payload}` | Opens security feedback page
-| `roblox://navigation/experience_sort` <br />Search Parameters: ? | N/A | Supposedly opens an experience sort page
+| `roblox://navigation/experience_sort` <br />Search Parameters:<br />- sortId | N/A | Opens an experience sort page on the home page
 | `roblox://navigation/party` | N/A | Supposedly open the party page

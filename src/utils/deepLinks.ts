@@ -47,9 +47,8 @@ export type DeepLink<
 
 /*
 missing:
-roblox://navigation/catalog/equip
-roblox://navigation/sort?sortName=Discover
-roblox://navigation/experience_sort
+roblox://open/lock_screen_widget
+
 ... need to figure out how they work
 */
 
@@ -137,6 +136,17 @@ export function getDeepLinks(
 						{
 							name: "code",
 							required: true,
+						},
+					],
+				},
+				{
+					regex: /^navigation\/share_links\/(?<type>[^\/]+)\/(?<code>[^\/]+)$/i,
+					path: [
+						{
+							name: "type",
+						},
+						{
+							name: "code",
 						},
 					],
 				},
@@ -610,6 +620,97 @@ export function getDeepLinks(
 			toProtocolUrl: "navigation/more",
 		} as DeepLink<"navigationMore">,
 		{
+			name: "chartsSortDetails",
+			protocolUrls: [
+				{
+					regex: /^navigation\/sort$/i,
+					query: [
+						{
+							name: "sortName",
+							regex: /^.+$/i,
+							required: true,
+						},
+					],
+				},
+			],
+			websiteUrls: [
+				{
+					regex: /^\/charts$/i,
+				},
+			],
+			transformWebsiteParams: (_, url) => {
+				const hashParts = url.hash.split("/");
+				if (hashParts.length === 3 && hashParts[1] === "sortName") {
+					return {
+						sortName: hashParts[2],
+					};
+				}
+			},
+			toProtocolUrl: "navigation/sort",
+			toWebsiteUrl: (params) => `/charts#!/sortName/${params.sortName}`,
+		} as DeepLink<
+			"chartsSortDetails",
+			{
+				sortName: string;
+			},
+			{
+				sortName?: string;
+			}
+		>,
+
+		{
+			name: "omniSortDetailsWeb",
+			websiteUrls: [
+				{
+					regex: /^\/charts$/i,
+				},
+			],
+			transformWebsiteParams: (_, url) => {
+				const hashParts = url.hash.split("/");
+				if (hashParts.length >= 3 && hashParts[1] === "sortName") {
+					return {
+						sortName: hashParts[2],
+					};
+				}
+				return {};
+			},
+			toWebsiteUrl: (params) => `/charts#!/sortName/${params.sortName}`,
+		} as DeepLink<
+			"omniSortDetailsWeb",
+			{
+				sortName: string;
+			},
+			{
+				sortName: string;
+			}
+		>,
+		{
+			name: "omniSortDetailsWeb",
+			protocolUrls: [
+				{
+					regex: /^navigation\/experience_sort$/i,
+					query: [
+						{
+							name: "sortId",
+							regex: /^.+$/i,
+							required: true,
+						},
+					],
+				},
+			],
+			websiteUrls: [
+				{
+					regex: /^\/home$/i,
+				},
+			],
+			toProtocolUrl: "navigation/experience_sort",
+		} as DeepLink<
+			"omniSortDetailsWeb",
+			{
+				sortId: string;
+			}
+		>,
+		{
 			name: "charts",
 			protocolUrls: [
 				{
@@ -792,6 +893,39 @@ export function getDeepLinks(
 				joinAttemptId?: string;
 				joinAttemptOrigin?: string;
 				browserTrackerId?: string;
+			}
+		>,
+		{
+			name: "equipItem",
+			protocolUrls: [
+				{
+					regex: /^navigation\/catalog\/equip$/i,
+					query: [
+						{
+							name: "itemType",
+							regex: /^(Asset|Bundle)$/i,
+							required: true,
+						},
+						{
+							name: "itemId",
+							regex: /^\d+$/,
+							required: true,
+						},
+					],
+				},
+			],
+			arbitaryParameters: {
+				itemId: "protocol",
+				itemType: "protocol",
+			},
+			toProtocolUrl: "navigation/catalog/equip",
+			toWebsiteUrl: (params) =>
+				`/catalog/${params.itemType.toLowerCase() === "asset" ? "catalog" : "bundles"}/${params.itemId}`,
+		} as DeepLink<
+			"equipItem",
+			{
+				itemType: string;
+				itemId: string;
 			}
 		>,
 		{
