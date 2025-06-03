@@ -83,7 +83,106 @@ export default class DeepLinkParser<
 				name: U;
 			}
 		>
-	> {
+	> | null {
+		const deepLink = this._deepLinks.find((link) => link.name === type);
+		if (!deepLink) return null;
+
+		const validatedParams: Record<string, string> = {};
+		const requiredParams: Set<string> = new Set();
+
+		// Collect required parameters from protocol URLs
+		if (deepLink.protocolUrls) {
+			for (const url of deepLink.protocolUrls) {
+				if (url.path) {
+					for (const path of url.path) {
+						// Add path parameters to tracked parameters
+						if (params[path.name]) {
+							// @ts-expect-error: fine
+							validatedParams[path.name] = String(params[path.name]);
+						}
+					}
+				}
+				if (url.query) {
+					for (const query of url.query) {
+						const paramName =
+							"mappedName" in query ? query.mappedName : query.name;
+
+						// Track required parameters
+						if (query.required === true) {
+							requiredParams.add(String(paramName));
+						}
+
+						// Validate and add parameter if it exists
+						if (params[paramName] !== undefined) {
+							const value = String(params[paramName]);
+							// Check regex pattern if available
+							if (query.regex && !query.regex.test(value)) {
+								continue;
+							}
+
+							// @ts-expect-error: fine
+							validatedParams[paramName] = value;
+						}
+					}
+				}
+			}
+		}
+
+		// Also check website URLs for required parameters
+		if (deepLink.websiteUrls) {
+			for (const url of deepLink.websiteUrls) {
+				if (url.path) {
+					for (const path of url.path) {
+						if (params[path.name]) {
+							// @ts-expect-error: fine
+							validatedParams[path.name] = String(params[path.name]);
+						}
+					}
+				}
+				if (url.query) {
+					for (const query of url.query) {
+						const paramName =
+							"mappedName" in query ? query.mappedName : query.name;
+
+						// Track required parameters
+						if (query.required === true) {
+							requiredParams.add(String(paramName));
+						}
+
+						// Validate and add parameter if it exists
+						if (params[paramName] !== undefined) {
+							const value = String(params[paramName]);
+							// Check regex pattern if available
+							if (query.regex && !query.regex.test(value)) {
+								continue;
+							}
+
+							// @ts-expect-error: fine
+							validatedParams[paramName] = value;
+						}
+					}
+				}
+			}
+		}
+
+		// Also add arbitrary parameters that are explicitly allowed
+		if (deepLink.arbitaryParameters) {
+			for (const paramName in deepLink.arbitaryParameters) {
+				const allowed = deepLink.arbitaryParameters[paramName];
+
+				if (allowed && params[paramName] !== undefined) {
+					validatedParams[paramName] = String(params[paramName]);
+				}
+			}
+		}
+
+		// Check if all required parameters are present
+		for (const requiredParam of requiredParams) {
+			if (validatedParams[requiredParam] === undefined) {
+				return null; // Missing required parameter
+			}
+		}
+
 		return new ParsedDeepLink<
 			Extract<
 				T,
@@ -94,7 +193,8 @@ export default class DeepLinkParser<
 		>(
 			{
 				type,
-				params,
+
+				params: validatedParams,
 				// biome-ignore lint/suspicious/noExplicitAny: Fine
 			} as any,
 			this as DeepLinkParser,
