@@ -799,7 +799,7 @@ export function getDeepLinks(
 			protocolUrls: [
 				{
 					regex:
-						/^navigation\/(?<tabId>notification_settings|account_info|privacy_settings|parental_controls|spending_settings)$/i,
+						/^navigation\/(?<tabId>notification_settings|account_info|privacy_settings|parental_controls|spending_settings|app_permissions_settings|screentime_subsettings|blocked_experiences_subsettings|blocked_users_subsettings|experience_chat_subsettings|party_subsettings|voice_subsettings|trading_inventory_subsettings|private_server_subsettings|friends_contacts_subsettings|visibility_subsettings)$/i,
 					path: [
 						{
 							name: "tabId",
@@ -825,6 +825,30 @@ export function getDeepLinks(
 					tabId = "notification_settings";
 				} else if (hash === "payment-methods") {
 					tabId = "spending_settings";
+				} else if (hash === "app-permissions") {
+					tabId = "app_permissions_settings";
+				} else if (hash === "privacy/Screentime") {
+					tabId = "screentime_subsettings";
+				} else if (hash === "privacy/ContentRestrictions/BlockedExperiences") {
+					tabId = "blocked_experiences_subsettings";
+				} else if (hash === "privacy/BlockedUsers") {
+					tabId = "blocked_users_subsettings";
+				} else if (hash === "privacy/Communication/ExperienceChat") {
+					tabId = "experience_chat_subsettings";
+				} else if (hash === "privacy/Communication/Party") {
+					tabId = "party_subsettings";
+				} else if (hash === "privacy/Communication/Voice") {
+					tabId = "voice_subsettings";
+				} else if (hash === "privacy/TradingAndInventory") {
+					tabId = "trading_inventory_subsettings";
+				} else if (hash === "privacy/FriendsAndContacts") {
+					tabId = "friends_contacts_subsettings";
+				} else if (
+					hash === "privacy/VisibilityAndPrivateServers/PrivateServerPrivacy"
+				) {
+					tabId = "private_server_subsettings";
+				} else if (hash === "privacy/VisibilityAndPrivateServers/Visibility") {
+					tabId = "visibility_subsettings";
 				}
 
 				return {
@@ -845,6 +869,28 @@ export function getDeepLinks(
 					url += "#!/notifications";
 				} else if (params.tabId === "spending_settings") {
 					url += "#!/payment-methods";
+				} else if (params.tabId === "app_permissions_settings") {
+					url += "#!/app-permissions";
+				} else if (params.tabId === "screentime_subsettings") {
+					url += "#!/privacy/Screentime";
+				} else if (params.tabId === "blocked_experiences_subsettings") {
+					url += "#!/privacy/ContentRestrictions/BlockedExperiences";
+				} else if (params.tabId === "blocked_users_subsettings") {
+					url += "#!/privacy/BlockedUsers";
+				} else if (params.tabId === "experience_chat_subsettings") {
+					url += "#!/privacy/Communication/ExperienceChat";
+				} else if (params.tabId === "party_subsettings") {
+					url += "#!/privacy/Communication/Party";
+				} else if (params.tabId === "voice_subsettings") {
+					url += "#!/privacy/Communication/Voice";
+				} else if (params.tabId === "trading_inventory_subsettings") {
+					url += "#!/privacy/TradingAndInventory";
+				} else if (params.tabId === "friends_contacts_subsettings") {
+					url += "#!/privacy/FriendsAndContacts";
+				} else if (params.tabId === "private_server_subsettings") {
+					url += "#!/privacy/VisibilityAndPrivateServers/PrivateServerPrivacy";
+				} else if (params.tabId === "visibility_subsettings") {
+					url += "#!/privacy/VisibilityAndPrivateServers/Visibility";
 				} else {
 					url += "#!/info";
 				}
