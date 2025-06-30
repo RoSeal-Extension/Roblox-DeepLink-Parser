@@ -60,7 +60,7 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/game_details` <br />Search Parameters:<br />- gameId<br />- privateServerLinkCode | `www.roblox.com/games/{placeId}/name` <br />Search Parameters:<br />- privateServerLinkCode | Opens the details page of an experience
 | `roblox://navigation/security_alert` <br />Search Parameters:<br />- payload | `www.roblox.com/security-feedback?payload={payload}` | Opens security feedback page
 | `roblox://navigation/experience_sort` <br />Search Parameters:<br />- sortId | N/A | Opens an experience sort page on the home page
-| `roblox://navigation/party` | N/A | Supposedly open the party page
+| `roblox://navigation/party` | N/A | Opens the party page
 | `roblox://navigation/app_permissions_settings` | `www.roblox.com/my/account#!/app-permissions` | Opens the app permissions page
 | `roblox://navigation/screentime_subsettings` | `www.roblox.com/my/account#!/privacy/Screentime` | Opens the screentime subsettings page
 | `roblox://navigation/blocked_experiences_subsettings` | `www.roblox.com/my/account#!/privacy/ContentRestrictions/BlockedExperiences` | Opens the blocked experiences subsettings page
