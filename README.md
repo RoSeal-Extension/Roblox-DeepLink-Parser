@@ -61,3 +61,15 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/security_alert` <br />Search Parameters:<br />- payload | `www.roblox.com/security-feedback?payload={payload}` | Opens security feedback page
 | `roblox://navigation/experience_sort` <br />Search Parameters:<br />- sortId | N/A | Opens an experience sort page on the home page
 | `roblox://navigation/party` | N/A | Supposedly open the party page
+| `roblox://navigation/app_permissions_settings` | `www.roblox.com/my/account#!/app-permissions` | Opens the app permissions page
+| `roblox://navigation/screentime_subsettings` | `www.roblox.com/my/account#!/privacy/Screentime` | Opens the screentime subsettings page
+| `roblox://navigation/blocked_experiences_subsettings` | `www.roblox.com/my/account#!/privacy/ContentRestrictions/BlockedExperiences` | Opens the blocked experiences subsettings page
+| `roblox://navigation/blocked_users_subsettings` | `www.roblox.com/my/account#!/privacy/BlockedUsers` | Opens the blocked users subsettings page
+| `roblox://navigation/experience_chat_subsettings` | `www.roblox.com/my/account#!/privacy/ExperienceChat` | Opens the experience chat subsettings page
+| `roblox://navigation/party_subsettings` | `www.roblox.com/my/account#!/privacy/Party` | Opens the party subsettings page
+| `roblox://navigation/voice_subsettings` | `www.roblox.com/my/account#!/privacy/Voice` | Opens the voice subsettings page
+| `roblox://navigation/trading_inventory_subsettings` | `www.roblox.com/my/account#!/privacy/TradingInventory` | Opens the trading inventory subsettings page
+| `roblox://navigation/friends_contacts_subsettings` | `www.roblox.com/my/account#!/privacy/FriendsAndContacts` | Opens the friends and contacts subsettings page
+| `roblox://navigation/private_server_subsettings` | `www.roblox.com/my/account#!/privacy/PrivateServers` | Opens the private server subsettings page
+| `roblox://navigation/visibility_subsettings` | `www.roblox.com/my/account#!/privacy/Visibility` | Opens the visibility subsettings page
+| 
