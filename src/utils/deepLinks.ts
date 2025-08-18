@@ -1084,6 +1084,8 @@ export function getDeepLinks(
 				browserTrackerId?: string;
 				referralPage?: string;
 				referredByPlayerId?: string;
+				eventId?: string;
+				isoContext?: string;
 			},
 			{
 				placeId: string;
@@ -1098,6 +1100,8 @@ export function getDeepLinks(
 				browserTrackerId?: string;
 				referralPage?: string;
 				referredByPlayerId?: string;
+				eventId?: string;
+				isoContext?: string;
 			}
 		>,
 		{
