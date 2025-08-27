@@ -638,16 +638,19 @@ export function getDeepLinks(
 					regex: /^\/charts$/i,
 				},
 			],
+			arbitaryParameters: {
+				sortName: "protocol",
+			},
 			transformWebsiteParams: (_, url) => {
 				const hashParts = url.hash.split("/");
 				if (hashParts.length === 3 && hashParts[1] === "sortName") {
 					return {
-						sortName: hashParts[2],
+						sortName: hashParts[2].split("?")[0],
 					};
 				}
 			},
 			toProtocolUrl: "navigation/sort",
-			toWebsiteUrl: (params) => `/charts#!/sortName/${params.sortName}`,
+			toWebsiteUrl: (params) => `/charts#/sortName/${params.sortName}`,
 		} as DeepLink<
 			"chartsSortDetails",
 			{
@@ -664,15 +667,22 @@ export function getDeepLinks(
 					regex: /^\/charts$/i,
 				},
 			],
+			arbitaryParameters: {
+				sortName: true,
+			},
 			transformWebsiteParams: (_, url) => {
 				const hashParts = url.hash.split("/");
-				if (hashParts.length >= 3 && hashParts[1] === "sortName") {
+				if (
+					hashParts.length >= 3 &&
+					hashParts[1] === "sortName" &&
+					hashParts[2] === "v2"
+				) {
 					return {
-						sortName: hashParts[2],
+						sortName: hashParts[3].split("?")[0],
 					};
 				}
 			},
-			toWebsiteUrl: (params) => `/charts#!/sortName/${params.sortName}`,
+			toWebsiteUrl: (params) => `/charts#/sortName/v2/${params.sortName}`,
 		} as DeepLink<
 			"omniSortDetailsWeb",
 			{
@@ -718,21 +728,6 @@ export function getDeepLinks(
 			toWebsiteUrl: "/charts",
 			toProtocolUrl: "navigation/games",
 		} as DeepLink<"charts">,
-		/*
-		{
-			name: "sortDetails",
-			protocolUrls: [
-				{
-					regex: /^navigation\/sort$/i,
-					query: [
-						{
-							name: "sortName",
-							regex: /^.+$/i,
-						},
-					],
-				},
-			],
-		} as DeepLink<"sortDetails">,*/
 		{
 			name: "itemDetails",
 			protocolUrls: [

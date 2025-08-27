@@ -429,3 +429,11 @@ export default class DeepLinkParser<
 		return this.parseWebsiteLink(url);
 	}
 }
+
+const parser = new DeepLinkParser();
+parser
+	.parseWebsiteLink(
+		"https://www.roblox.com/charts#/sortName/top-trending?country=all&device=computer",
+	)
+	.then((data) => data?.toWebsiteUrl())
+	.then(console.log);
