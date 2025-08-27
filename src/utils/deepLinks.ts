@@ -657,7 +657,6 @@ export function getDeepLinks(
 				sortName?: string;
 			}
 		>,
-
 		{
 			name: "omniSortDetailsWeb",
 			websiteUrls: [
@@ -672,7 +671,6 @@ export function getDeepLinks(
 						sortName: hashParts[2],
 					};
 				}
-				return {};
 			},
 			toWebsiteUrl: (params) => `/charts#!/sortName/${params.sortName}`,
 		} as DeepLink<
@@ -685,7 +683,7 @@ export function getDeepLinks(
 			}
 		>,
 		{
-			name: "omniSortDetailsWeb",
+			name: "omniSortDetailsApp",
 			protocolUrls: [
 				{
 					regex: /^navigation\/experience_sort$/i,
@@ -698,14 +696,9 @@ export function getDeepLinks(
 					],
 				},
 			],
-			websiteUrls: [
-				{
-					regex: /^\/home$/i,
-				},
-			],
 			toProtocolUrl: "navigation/experience_sort",
 		} as DeepLink<
-			"omniSortDetailsWeb",
+			"omniSortDetailsApp",
 			{
 				sortId: string;
 			}
@@ -717,8 +710,13 @@ export function getDeepLinks(
 					regex: /^navigation\/games$/i,
 				},
 			],
+			websiteUrls: [
+				{
+					regex: /^\/charts$/i,
+				},
+			],
 			toWebsiteUrl: "/charts",
-			toProtocolUrl: "navigation/charts",
+			toProtocolUrl: "navigation/games",
 		} as DeepLink<"charts">,
 		/*
 		{
