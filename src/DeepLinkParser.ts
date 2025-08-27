@@ -15,8 +15,14 @@ export type DeepLinkParserUrls = {
 	robloxApiDomain: string;
 };
 
+export type DeepLinkParserFns = {
+	getPlaceUniverseId: (placeId: number) => Promise<number | null>;
+	getUniverseRootPlaceId: (placeId: number) => Promise<number | null>;
+};
+
 export type DeepLinkParserConstructorProps = {
 	urls?: Partial<DeepLinkParserUrls>;
+	fns?: Partial<DeepLinkParserFns>;
 	fetchFn?: typeof fetch;
 };
 
@@ -32,9 +38,31 @@ export default class DeepLinkParser<
 		robloxUrl: DEFAULT_ROBLOX_WEBSITE_URL,
 		robloxApiDomain: DEFAULT_ROBLOX_API_DOMAIN,
 	};
+	private _fns: DeepLinkParserFns;
 	private _fetchFn: typeof fetch = fetch.bind(globalThis);
+
 	public _deepLinks: T[];
+
 	constructor(data?: DeepLinkParserConstructorProps) {
+		this._fns = {
+			getPlaceUniverseId:
+				data?.fns?.getPlaceUniverseId ??
+				((placeId) =>
+					this._fetchFn(
+						`https://apis${this._urls.robloxApiDomain}/universes/v1/places/${placeId}/universe`,
+					)
+						.then((res) => res.json())
+						.then((res) => res.universeId ?? null)),
+			getUniverseRootPlaceId:
+				data?.fns?.getUniverseRootPlaceId ??
+				((universeId) =>
+					this._fetchFn(
+						`https://games${this._urls.robloxApiDomain}/v1/games?universeIds=${universeId}`,
+					)
+						.then((res) => res.json())
+						.then((res) => res?.data?.[0]?.rootPlaceId ?? null)),
+		};
+
 		if (data?.urls) {
 			for (const _key in data.urls) {
 				const key = _key as keyof DeepLinkParserUrls;
@@ -44,26 +72,10 @@ export default class DeepLinkParser<
 
 		if (data?.fetchFn) this._fetchFn = data.fetchFn;
 		this._deepLinks = getDeepLinks(
-			this._getUniverseRootPlaceId.bind(this),
-			this._getPlaceUniverseId.bind(this),
+			this._fns.getUniverseRootPlaceId.bind(this),
+			this._fns.getPlaceUniverseId.bind(this),
 			this._urls.robloxUrl,
 		) as T[];
-	}
-
-	private _getPlaceUniverseId(placeId: number): Promise<number | null> {
-		return this._fetchFn(
-			`https://apis${this._urls.robloxApiDomain}/universes/v1/places/${placeId}/universe`,
-		)
-			.then((res) => res.json())
-			.then((res) => res.universeId ?? null);
-	}
-
-	private _getUniverseRootPlaceId(universeId: number): Promise<number | null> {
-		return this._fetchFn(
-			`https://games${this._urls.robloxApiDomain}/v1/games?universeIds=${universeId}`,
-		)
-			.then((res) => res.json())
-			.then((res) => res?.data?.[0]?.rootPlaceId ?? null);
 	}
 
 	public createDeepLink<U extends T["name"]>(
