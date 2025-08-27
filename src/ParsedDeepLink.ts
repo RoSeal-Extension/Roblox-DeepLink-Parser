@@ -103,6 +103,7 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 		);
 		if (deepLinkMobile) {
 			url.searchParams.append("af_dp", deepLinkMobile);
+			url.searchParams.append("deep_link_value", deepLinkMobile);
 		}
 		if (deepLinkWeb) {
 			url.searchParams.append("af_web_dp", deepLinkWeb);

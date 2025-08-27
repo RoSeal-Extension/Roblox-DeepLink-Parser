@@ -1,5 +1,5 @@
 {
 	"name": "@roseal/roblox-deeplink-parser",
-	"version": "0.1.9",
+	"version": "0.1.10",
 	"exports": "./src/DeepLinkParser.ts"
 }

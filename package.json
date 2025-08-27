@@ -1,18 +1,14 @@
 {
 	"name": "@roseal/roblox-deeplink-parser",
 	"private": false,
-	"version": "0.1.9",
+	"version": "0.1.10",
 	"main": "src/DeepLinkParser.ts",
 	"module": "src/DeepLinkParser.ts",
 	"types": "src/DeepLinkParser.ts",
 	"type": "module",
 	"devDependencies": {
-		"@types/bun": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "^5.6.3"
-	},
-	"dependencies": {
-		"@biomejs/biome": "^1.9.4"
+		"@types/bun": "latest",
+		"typescript": "^5.9.2",
+		"@biomejs/biome": "^2.2.2"
 	}
 }
