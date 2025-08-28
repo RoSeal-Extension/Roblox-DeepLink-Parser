@@ -20,10 +20,22 @@ export type DeepLinkParserFns = {
 	getUniverseRootPlaceId: (placeId: number) => Promise<number | null>;
 };
 
-export type DeepLinkParserConstructorProps = {
+export type DisallowedParams<
+	// biome-ignore lint/suspicious/noExplicitAny: A very strange typescript issue
+	T extends DeepLink<string, any, any, any>,
+	// biome-ignore lint/suspicious/noExplicitAny: A very strange typescript issue
+> = T extends DeepLink<infer K, any, any, infer P>
+	? Record<K, Array<keyof P>>
+	: never;
+
+export type DeepLinkParserConstructorProps<
+	// biome-ignore lint/suspicious/noExplicitAny: A very strange typescript issue
+	T extends DeepLink<string, any, any, any>,
+> = {
 	urls?: Partial<DeepLinkParserUrls>;
 	fns?: Partial<DeepLinkParserFns>;
 	fetchFn?: typeof fetch;
+	disallowedParams?: DisallowedParams<T>;
 };
 
 export default class DeepLinkParser<
@@ -40,10 +52,11 @@ export default class DeepLinkParser<
 	};
 	private _fns: DeepLinkParserFns;
 	private _fetchFn: typeof fetch = fetch.bind(globalThis);
+	private _disallowedParams: DisallowedParams<T> | undefined;
 
 	public _deepLinks: T[];
 
-	constructor(data?: DeepLinkParserConstructorProps) {
+	constructor(data?: DeepLinkParserConstructorProps<T>) {
 		this._fns = {
 			getPlaceUniverseId:
 				data?.fns?.getPlaceUniverseId ??
@@ -68,6 +81,10 @@ export default class DeepLinkParser<
 				const key = _key as keyof DeepLinkParserUrls;
 				if (data.urls[key]) this._urls[key] = data.urls[key] as string;
 			}
+		}
+
+		if (data?.disallowedParams) {
+			this._disallowedParams = data.disallowedParams;
 		}
 
 		if (data?.fetchFn) this._fetchFn = data.fetchFn;
@@ -102,12 +119,10 @@ export default class DeepLinkParser<
 		const validatedParams: Record<string, string> = {};
 		const requiredParams: Set<string> = new Set();
 
-		// Collect required parameters from protocol URLs
 		if (deepLink.protocolUrls) {
 			for (const url of deepLink.protocolUrls) {
 				if (url.path) {
 					for (const path of url.path) {
-						// Add path parameters to tracked parameters
 						if (params[path.name]) {
 							// @ts-expect-error: fine
 							validatedParams[path.name] = String(params[path.name]);
@@ -140,7 +155,6 @@ export default class DeepLinkParser<
 			}
 		}
 
-		// Also check website URLs for required parameters
 		if (deepLink.websiteUrls) {
 			for (const url of deepLink.websiteUrls) {
 				if (url.path) {
@@ -156,12 +170,10 @@ export default class DeepLinkParser<
 						const paramName =
 							"mappedName" in query ? query.mappedName : query.name;
 
-						// Track required parameters
 						if (query.required === true) {
 							requiredParams.add(String(paramName));
 						}
 
-						// Validate and add parameter if it exists
 						if (params[paramName] !== undefined) {
 							const value = String(params[paramName]);
 							// Check regex pattern if available
@@ -177,7 +189,6 @@ export default class DeepLinkParser<
 			}
 		}
 
-		// Also add arbitrary parameters that are explicitly allowed
 		if (deepLink.arbitaryParameters) {
 			for (const paramName in deepLink.arbitaryParameters) {
 				const allowed = deepLink.arbitaryParameters[paramName];
@@ -188,10 +199,15 @@ export default class DeepLinkParser<
 			}
 		}
 
-		// Check if all required parameters are present
+		if (this._disallowedParams?.[type]) {
+			for (const param of this._disallowedParams[type]) {
+				delete validatedParams[param as string];
+			}
+		}
+
 		for (const requiredParam of requiredParams) {
 			if (validatedParams[requiredParam] === undefined) {
-				return null; // Missing required parameter
+				return null;
 			}
 		}
 
@@ -221,7 +237,9 @@ export default class DeepLinkParser<
 		}
 		const urlObj = new URL(url);
 
-		const deepLinkMobile = urlObj.searchParams.get("af_dp");
+		const deepLinkMobile =
+			urlObj.searchParams.get("af_dp") ||
+			urlObj.searchParams.get("deep_link_value");
 		const deepLinkWeb = urlObj.searchParams.get("af_web_dp");
 
 		// prioritize mobile over web
@@ -323,6 +341,12 @@ export default class DeepLinkParser<
 					params = transformedParams;
 				}
 
+				if (this._disallowedParams?.[deepLink.name]) {
+					for (const param of this._disallowedParams[deepLink.name]) {
+						delete params[param as string];
+					}
+				}
+
 				return new ParsedDeepLink<T>(
 					{
 						type: deepLink.name,
@@ -413,6 +437,12 @@ export default class DeepLinkParser<
 					if (!transformedParams) continue;
 
 					params = transformedParams;
+				}
+
+				if (this._disallowedParams?.[deepLink.name]) {
+					for (const param of this._disallowedParams[deepLink.name]) {
+						delete params[param as string];
+					}
 				}
 
 				return new ParsedDeepLink<T>(

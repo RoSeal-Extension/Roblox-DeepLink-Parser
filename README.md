@@ -19,7 +19,7 @@ parser.parseLink("https://www.roblox.com/my/avatar").then((link) => {
 });
 
 // ... and you can do these as well specifically:
-parser.parseDeepLink("roblox://navigation/avatar")
+parser.parseProtocolLink("roblox://navigation/avatar")
 parser.parseAppsFlyerLink("https://ro.blox.com/Ebh5?af_dp=roblox%3A%2F%2Fnavigation%2Favatar&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fmy%2Favatar");
 parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 ```
