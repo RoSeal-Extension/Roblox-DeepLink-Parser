@@ -93,6 +93,13 @@ export function getDeepLinks(
 			}
 		>,
 		{
+			name: "fae",
+			protocolUrls: [{
+				regex: /^navigation\/fae$/
+			}],
+			toProtocolUrl: "navigation/fae"
+		} as DeepLink<"fae", EmptyObj, EmptyObj>
+		{
 			name: "userContentPosts",
 			protocolUrls: [
 				{
