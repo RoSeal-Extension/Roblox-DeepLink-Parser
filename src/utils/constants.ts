@@ -11,4 +11,4 @@ export const DEFAULT_ROBLOX_STUDIO_AUTHED_PROTOCOL = "roblox-studio";
 export const DEFAULT_ROBLOX_STUDIO_AUTH_AUTHED_PROTOCOL = "roblox-studio-auth";
 
 export const DEFAULT_PLACELAUNCHER_URL =
-	"https://assetgame.roblox.com/game/PlaceLauncher.ashx";
+	"https://www.roblox.com/game/PlaceLauncher.ashx";
