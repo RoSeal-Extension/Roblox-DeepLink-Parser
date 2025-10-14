@@ -1,7 +1,7 @@
 import ParsedDeepLink, { type ExtractParameterType } from "./ParsedDeepLink";
 import {
 	DEFAULT_APPSYFLYER_BASE_URL,
-	DEFAULT_ROBLOX_PROTOCOL,
+	DEFAULT_ROBLOX_PLAYER_DEEPLINK_PROTOCOL,
 	DEFAULT_ROBLOX_WEBSITE_URL,
 	DEFAULT_ROBLOX_API_DOMAIN,
 	LOCALE_REGEX,
@@ -10,7 +10,7 @@ import { getDeepLinks, type DeepLink } from "./utils/deepLinks";
 
 export type DeepLinkParserUrls = {
 	appsFlyerBaseUrl: string;
-	robloxProtocol: string;
+	robloxPlayerDeepLinkProtocol: string;
 	robloxUrl: string;
 	robloxApiDomain: string;
 };
@@ -46,7 +46,7 @@ export default class DeepLinkParser<
 > {
 	public _urls: DeepLinkParserUrls = {
 		appsFlyerBaseUrl: DEFAULT_APPSYFLYER_BASE_URL,
-		robloxProtocol: DEFAULT_ROBLOX_PROTOCOL,
+		robloxPlayerDeepLinkProtocol: DEFAULT_ROBLOX_PLAYER_DEEPLINK_PROTOCOL,
 		robloxUrl: DEFAULT_ROBLOX_WEBSITE_URL,
 		robloxApiDomain: DEFAULT_ROBLOX_API_DOMAIN,
 	};
@@ -364,9 +364,9 @@ export default class DeepLinkParser<
 	public async parseProtocolLink(
 		url: string,
 	): Promise<ParsedDeepLink<T> | null> {
-		const prepend = `${this._urls.robloxProtocol}://`;
+		const prepend = `${this._urls.robloxPlayerDeepLinkProtocol}://`;
 		const urlObj = new URL(url.replace(prepend, `${prepend}/`));
-		if (urlObj.protocol !== `${this._urls.robloxProtocol}:`) {
+		if (urlObj.protocol !== `${this._urls.robloxPlayerDeepLinkProtocol}:`) {
 			return null;
 		}
 		let searchParams = urlObj.searchParams;
@@ -464,7 +464,7 @@ export default class DeepLinkParser<
 			return this.parseAppsFlyerLink(url);
 		}
 
-		if (url.startsWith(`${this._urls.robloxProtocol}://`)) {
+		if (url.startsWith(`${this._urls.robloxPlayerDeepLinkProtocol}://`)) {
 			return this.parseProtocolLink(url);
 		}
 
