@@ -1,5 +1,8 @@
 {
 	"name": "@roseal/roblox-deeplink-parser",
 	"version": "0.1.14",
-	"exports": "./src/DeepLinkParser.ts"
+	"exports": {
+		".": "./src/DeepLinkParser.ts",
+		"./authedProtocol": "./src/authedProtocol.ts"
+	}
 }
