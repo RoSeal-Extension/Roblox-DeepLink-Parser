@@ -12,8 +12,8 @@
 			"types": "./src/DeepLinkParser.ts"
 		},
 		"./authedProtocol": {
-			"import": "./src/authedProtocol.ts",
-			"types": "./src/authedProtocol.ts"
+			"import": "./src/authedProtocolParser.ts",
+			"types": "./src/authedProtocolParser.ts"
 		}
 	},
 	"devDependencies": {

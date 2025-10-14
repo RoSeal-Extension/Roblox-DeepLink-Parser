@@ -3,6 +3,6 @@
 	"version": "0.1.15",
 	"exports": {
 		".": "./src/DeepLinkParser.ts",
-		"./authedProtocol": "./src/authedProtocol.ts"
+		"./authedProtocol": "./src/AuthedProtocolParser.ts"
 	}
 }
