@@ -52,7 +52,7 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 		}
 
 		const url = new URL(
-			`${this._deepLinkParser._urls.robloxProtocol}://${path}`,
+			`${this._deepLinkParser._urls.robloxPlayerDeepLinkProtocol}://${path}`,
 		);
 		url.search = search.toString();
 
