@@ -44,7 +44,7 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/avatar_clothing_sort` | N/A | Open avatar clothing sorting page
 | `roblox://navigation/avatar_profile_picture_editor` | N/A | Open avatar profile picture editor page
 | `roblox://navigation/catalog` | `www.roblox.com/catalog` | Open avatar marketplace page
-| `roblox://navigation/catalog/equip` <br />Search Parameters:<br />- itemId<br />- itemType (Asset|Bundle) | N/A | Equip or try on an avatar item
+| `roblox://navigation/catalog/equip` <br />Search Parameters:<br />- itemId<br />- itemType (Asset\|Bundle) | N/A | Equip or try on an avatar item
 | `roblox://navigation/friends` | `www.roblox.com/users/friends` | View the currently authenticated user's friends
 | `roblox://navigation/avatar` <br />Search Parameters:<br />- itemType (Character)<br />- itemId | `www.roblox.com/my/avatar` | Open the avatar editor page
 | `roblox://navigation/more` | N/A | Open the More section of the app
@@ -56,9 +56,9 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/privacy_settings` | `www.roblox.com/my/account#!/privacy` | Open webview of the account settings privacy page
 | `roblox://navigation/parental_controls` | `www.roblox.com/my/account#!/parental-controls` | Open webview of the account settings parental controls page
 | `roblox://navigation/spending_settings` | `www.roblox.com/my/account#!/payment-methods` | Open webview of the account settings payment methods page
-| `roblox://navigation/qr_code_redemption` <br />Search Parameters:<br />- itemType (Asset|Bundle)<br />- itemId | N/A | Redeem an item which can be obtained by scanning a QR code
+| `roblox://navigation/qr_code_redemption` <br />Search Parameters:<br />- itemType (Asset\|Bundle)<br />- itemId | N/A | Redeem an item which can be obtained by scanning a QR code
 | `roblox://navigation/game_details` <br />Search Parameters:<br />- gameId<br />- privateServerLinkCode | `www.roblox.com/games/{placeId}/name` <br />Search Parameters:<br />- privateServerLinkCode | Opens the details page of an experience
-| `roblox://navigation/security_alert` <br />Search Parameters:<br />- payload | `www.roblox.com/security-feedback?payload={payload}` | Opens security feedback page
+| `roblox://navigation/security_alert` <br />Search Parameters:<br />- payload | `www.roblox.com/security-feedback` <br />Search Parameters:<br />- payload | Opens security feedback page
 | `roblox://navigation/experience_sort` <br />Search Parameters:<br />- sortId | N/A | Opens an experience sort page on the home page
 | `roblox://navigation/party` | N/A | Opens the party page
 | `roblox://navigation/app_permissions_settings` | `www.roblox.com/my/account#!/app-permissions` | Opens the app permissions page
@@ -74,4 +74,4 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/visibility_subsettings` | `www.roblox.com/my/account#!/privacy/Visibility` | Opens the visibility subsettings page
 | `roblox://navigation/fae` | N/A | Opens the facial age estimation page
 | `roblox://navigation/fae_upsell_overlay` | N/A | Opens the facial age estimation overlay page
-| `roblox://navigation/account_recovery` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | `www.roblox.com/login/forgot-password-or-username?origin={origin}&username={origin}&recoverySessionId={recoverySessionId}` | Opens the account recovery page
+| `roblox://navigation/account_recovery` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | `www.roblox.com/login/forgot-password-or-username` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | Opens the account recovery page
