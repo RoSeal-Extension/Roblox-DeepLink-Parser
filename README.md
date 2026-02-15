@@ -72,4 +72,6 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/friends_contacts_subsettings` | `www.roblox.com/my/account#!/privacy/FriendsAndContacts` | Opens the friends and contacts subsettings page
 | `roblox://navigation/private_server_subsettings` | `www.roblox.com/my/account#!/privacy/PrivateServers` | Opens the private server subsettings page
 | `roblox://navigation/visibility_subsettings` | `www.roblox.com/my/account#!/privacy/Visibility` | Opens the visibility subsettings page
-| 
+| `roblox://navigation/fae` | N/A | Opens the facial age estimation page
+| `roblox://navigation/fae_upsell_overlay` | N/A | Opens the facial age estimation overlay page
+| `roblox://navigation/account_recovery` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | `www.roblox.com/login/forgot-password-or-username?origin={origin}&username={origin}&recoverySessionId={recoverySessionId}` | Opens the account recovery page

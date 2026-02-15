@@ -93,6 +93,53 @@ export function getDeepLinks(
 			}
 		>,
 		{
+			name: "accountRecovery",
+			protocolUrls: [
+				{
+					regex: /^navigation\/account_recovery$/i,
+					query: [
+						{
+							name: "origin",
+						},
+						{
+							name: "username",
+						},
+						{
+							name: "recoverySessionId",
+						},
+					],
+				},
+				{
+					regex: /^\/login\/forgot-password-or-username?$/i,
+					query: [
+						{
+							name: "origin",
+						},
+						{
+							name: "username",
+						},
+						{
+							name: "recoverySessionId",
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/account_recovery",
+			toWebsiteUrl: "/login/forgot-password-or-username",
+		} as DeepLink<
+			"accountRecovery",
+			{
+				origin?: string;
+				username?: string;
+				recoverySessionId?: string;
+			},
+			{
+				origin?: string;
+				username?: string;
+				recoverySessionId?: string;
+			}
+		>,
+		{
 			name: "fae",
 			protocolUrls: [
 				{
@@ -101,6 +148,15 @@ export function getDeepLinks(
 			],
 			toProtocolUrl: "navigation/fae",
 		} as DeepLink<"fae", EmptyObj, EmptyObj>,
+		{
+			name: "faeUpsellOverlay",
+			protocolUrls: [
+				{
+					regex: /^navigation\/fae_upsell_overlay$/,
+				},
+			],
+			toProtocolUrl: "navigation/fae_upsell_overlay",
+		} as DeepLink<"faeUpsellOverlay", EmptyObj, EmptyObj>,
 		{
 			name: "userContentPosts",
 			protocolUrls: [
