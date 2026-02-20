@@ -60,6 +60,19 @@ export function getDeepLinks(
 ) {
 	return [
 		{
+			name: "systemMessages",
+			protocolUrls: [
+				{
+					regex: /^navigation\/messages$/i,
+				},
+				{
+					regex: /^\/my\/messages$/i,
+				},
+			],
+			toProtocolUrl: "navigation/messages",
+			toWebsiteUrl: "/my/messages",
+		} as DeepLink<"systemMessages", EmptyObj, EmptyObj>,
+		{
 			name: "securityFeedback",
 			protocolUrls: [
 				{
