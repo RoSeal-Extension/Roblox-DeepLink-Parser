@@ -61,12 +61,14 @@ export function getDeepLinks(
 	return [
 		{
 			name: "systemMessages",
+			websiteUrls: [
+				{
+					regex: /^\/my\/messages$/i,
+				},
+			],
 			protocolUrls: [
 				{
 					regex: /^navigation\/messages$/i,
-				},
-				{
-					regex: /^\/my\/messages$/i,
 				},
 			],
 			toProtocolUrl: "navigation/messages",
