@@ -17,7 +17,7 @@
 				"default": "./dist/DeepLinkParser.js"
 			}
 		},
-		"./AuthedProtocolParser": {
+		"./authedProtocol": {
 			"import": {
 				"types": "./dist/AuthedProtocolParser.d.ts",
 				"default": "./dist/AuthedProtocolParser.js"
