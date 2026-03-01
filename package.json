@@ -28,5 +28,6 @@
 	},
 	"scripts": {
 		"build": "bunx bunup src/DeepLinkParser.ts src/AuthedProtocolParser.ts"
-	}
+	},
+	"license": "MIT"
 }
