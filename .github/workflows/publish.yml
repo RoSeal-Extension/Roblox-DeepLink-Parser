@@ -29,7 +29,7 @@ jobs:
 
       - name: Publish on NPM
         if: github.event_name == 'release' && github.repository == 'RoSeal-Extension/Roblox-DeepLink-Parser'
-        run: npm publish --access public --provenance
+        run: bun run build && npm publish --access public --provenance
         
       - name: Publish on JSR
         if: github.event_name == 'release' && github.repository == 'RoSeal-Extension/Roblox-DeepLink-Parser'
