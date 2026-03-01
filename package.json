@@ -11,7 +11,7 @@
 		"dist"
 	],
 	"exports": {
-		"./DeepLinkParser": {
+		".": {
 			"import": {
 				"types": "./dist/DeepLinkParser.d.ts",
 				"default": "./dist/DeepLinkParser.js"
