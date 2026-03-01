@@ -1,24 +1,27 @@
 {
-	"name": "@roseal/roblox-deeplink-parser",
+	"name": "roblox-deeplink-parser",
 	"private": false,
 	"version": "0.1.20",
-	"main": "src/DeepLinkParser.ts",
-	"module": "src/DeepLinkParser.ts",
-	"types": "src/DeepLinkParser.ts",
 	"type": "module",
+	"main": "./dist/DeepLinkParser.js",
+	"module": "./dist/DeepLinkParser.js",
+	"types": "./dist/DeepLinkParser.d.ts",
 	"exports": {
 		".": {
-			"import": "./src/DeepLinkParser.ts",
-			"types": "./src/DeepLinkParser.ts"
+			"import": "./dist/DeepLinkParser.js",
+			"types": "./dist/DeepLinkParser.d.ts"
 		},
 		"./authedProtocol": {
-			"import": "./src/AuthedProtocolParser.ts",
-			"types": "./src/AuthedProtocolParser.ts"
+			"import": "./dist/AuthedProtocolParser.js",
+			"types": "./dist/AuthedProtocolParser.d.ts"
 		}
 	},
 	"devDependencies": {
 		"@types/bun": "latest",
 		"typescript": "latest",
 		"@biomejs/biome": "latest"
+	},
+	"scripts": {
+		"build": "bunx bunup src/DeepLinkParser.ts src/AuthedProtocolParser.ts"
 	}
 }
