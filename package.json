@@ -29,5 +29,9 @@
 	"scripts": {
 		"build": "bunx bunup src/DeepLinkParser.ts src/AuthedProtocolParser.ts"
 	},
-	"license": "MIT"
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/RoSeal-Extension/Roblox-DeepLink-Parser.git"
+	}
 }

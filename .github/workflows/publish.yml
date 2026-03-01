@@ -24,7 +24,7 @@ jobs:
 
       - name: Publish on NPM
         if: github.event_name == 'release' && github.repository == 'RoSeal-Extension/Roblox-DeepLink-Parser'
-        run: NODE_AUTH_TOKEN="" npm publish --access public --provenance
+        run: rm -f .npmrc; NODE_AUTH_TOKEN="" npm publish --access public --provenance
         
       - name: Publish on JSR
         if: github.event_name == 'release' && github.repository == 'RoSeal-Extension/Roblox-DeepLink-Parser'
