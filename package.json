@@ -1,20 +1,25 @@
 {
 	"name": "roblox-deeplink-parser",
-	"private": false,
 	"version": "0.1.20",
 	"type": "module",
-	"main": "./dist/DeepLinkParser.js",
-	"module": "./dist/DeepLinkParser.js",
-	"types": "./dist/DeepLinkParser.d.ts",
+	"private": false,
+	"files": [
+		"dist"
+	],
 	"exports": {
-		".": {
-			"import": "./dist/DeepLinkParser.js",
-			"types": "./dist/DeepLinkParser.d.ts"
+		"./DeepLinkParser": {
+			"import": {
+				"types": "./dist/DeepLinkParser.d.ts",
+				"default": "./dist/DeepLinkParser.js"
+			}
 		},
-		"./authedProtocol": {
-			"import": "./dist/AuthedProtocolParser.js",
-			"types": "./dist/AuthedProtocolParser.d.ts"
-		}
+		"./AuthedProtocolParser": {
+			"import": {
+				"types": "./dist/AuthedProtocolParser.d.ts",
+				"default": "./dist/AuthedProtocolParser.js"
+			}
+		},
+		"./package.json": "./package.json"
 	},
 	"devDependencies": {
 		"@types/bun": "latest",
