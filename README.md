@@ -3,7 +3,7 @@ Parse Roblox deeplinks (roblox://*), website links (www.roblox.com), and appsfly
 
 ## Example
 ```ts
-import DeepLinkParser from "@roseal/roblox-deeplink-parser";
+import DeepLinkParser from "roblox-deeplink-parser";
 const parser = new DeepLinkParser();
 
 // same as parser.parseWebsiteLink
