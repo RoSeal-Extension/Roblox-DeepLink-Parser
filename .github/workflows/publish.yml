@@ -21,9 +21,6 @@ jobs:
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
-        with:
-          registry: 'https://registry.npmjs.org'
-
 
       - name: Publish on NPM
         if: github.event_name == 'release' && github.repository == 'RoSeal-Extension/Roblox-DeepLink-Parser'
