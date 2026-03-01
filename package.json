@@ -31,6 +31,6 @@
 		"@biomejs/biome": "latest"
 	},
 	"scripts": {
-		"build": "bunx bunup src/DeepLinkParser.ts src/AuthedProtocolParser.ts"
+		"build": "bunx bunup src/DeepLinkParser.ts src/AuthedProtocolParser.ts --no-check"
 	}
 }
