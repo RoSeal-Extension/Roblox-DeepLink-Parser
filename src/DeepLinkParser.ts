@@ -23,10 +23,11 @@ export type DeepLinkParserFns = {
 export type DisallowedParams<
 	// biome-ignore lint/suspicious/noExplicitAny: A very strange typescript issue
 	T extends DeepLink<string, any, any, any>,
+> =
 	// biome-ignore lint/suspicious/noExplicitAny: A very strange typescript issue
-> = T extends DeepLink<infer K, any, any, infer P>
-	? Record<K, Array<keyof P>>
-	: never;
+	T extends DeepLink<infer K, any, any, infer P>
+		? Record<K, Array<keyof P>>
+		: never;
 
 export type DeepLinkParserConstructorProps<
 	// biome-ignore lint/suspicious/noExplicitAny: A very strange typescript issue
@@ -92,7 +93,7 @@ export default class DeepLinkParser<
 			this._fns.getUniverseRootPlaceId.bind(this),
 			this._fns.getPlaceUniverseId.bind(this),
 			this._urls.robloxUrl,
-		) as T[];
+		) as unknown as T[];
 	}
 
 	public createDeepLink<U extends T["name"]>(

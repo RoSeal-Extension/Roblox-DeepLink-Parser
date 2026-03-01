@@ -1247,5 +1247,5 @@ export function getDeepLinks(
 				privateServerLinkCode?: string;
 			}
 		>,
-	];
+	] as const;
 }
