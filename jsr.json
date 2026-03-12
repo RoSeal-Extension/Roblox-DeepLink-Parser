@@ -1,6 +1,7 @@
 {
 	"name": "@roseal/roblox-deeplink-parser",
 	"version": "0.1.28",
+	"license": "MIT",
 	"exports": {
 		".": "./src/DeepLinkParser.ts",
 		"./authedProtocol": "./src/AuthedProtocolParser.ts"
