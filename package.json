@@ -3,7 +3,7 @@
 	"version": "0.1.28",
 	"type": "module",
 	"license": "MIT",
-	"homepage": "https://github.com/RoSeal-Extension/Roblox-DeepLink-Parsser",
+	"homepage": "https://github.com/RoSeal-Extension/Roblox-DeepLink-Parser",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/RoSeal-Extension/Roblox-DeepLink-Parser.git"
