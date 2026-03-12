@@ -447,6 +447,30 @@ export function getDeepLinks(
 			}
 		>,
 		{
+			name: "buyRobux",
+			protocolUrls: [
+				{
+					regex: /^navigation\/buy_robux$/i,
+				},
+			],
+			websiteUrls: [
+				{
+					regex: /^\/upgrades\/robux$/i,
+				},
+			],
+			toWebsiteUrl: "/upgrades/robux",
+			toProtocolUrl: "navigation/buy_robux",
+		} as DeepLink<"buyRobux">,
+		{
+			name: "currencyTransfer",
+			protocolUrls: [
+				{
+					regex: /^navigation\/currency_transfer$/i,
+				},
+			],
+			toProtocolUrl: "navigation/currency_transfer",
+		} as DeepLink<"currencyTransfer">,
+		{
 			name: "contacts",
 			protocolUrls: [
 				{
@@ -727,7 +751,7 @@ export function getDeepLinks(
 				}
 			},
 			toProtocolUrl: "navigation/sort",
-			toWebsiteUrl: "/charts/{params.sortName}",
+			toWebsiteUrl: "/charts/{sortName}",
 		} as DeepLink<
 			"chartsSortDetails",
 			{

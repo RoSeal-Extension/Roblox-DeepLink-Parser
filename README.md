@@ -76,3 +76,5 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/fae_upsell_overlay` | N/A | Opens the facial age estimation overlay page
 | `roblox://navigation/account_recovery` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | `www.roblox.com/login/forgot-password-or-username` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | Opens the account recovery page
 | `roblox://navigation/messages` | `https://www.roblox.com/my/messages` | Opens the systen messages page
+| `roblox://navigation/buy_robux` | `https://www.roblox.com/upgrades/robux` | Opens the purchase Robux page
+| `roblox://navigation/currency_transfer` | N/A | Opens the currency transfer page
