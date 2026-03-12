@@ -78,3 +78,4 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/messages` | `https://www.roblox.com/my/messages` | Opens the systen messages page
 | `roblox://navigation/buy_robux` | `https://www.roblox.com/upgrades/robux` | Opens the purchase Robux page
 | `roblox://navigation/currency_transfer` | N/A | Opens the currency transfer page
+| `roblox://navigation/device_preferences` | N/A | Opens the device preferences page

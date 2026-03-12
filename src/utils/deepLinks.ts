@@ -471,6 +471,15 @@ export function getDeepLinks(
 			toProtocolUrl: "navigation/currency_transfer",
 		} as DeepLink<"currencyTransfer">,
 		{
+			name: "devicePreferences",
+			protocolUrls: [
+				{
+					regex: /^navigation\/device_preferences$/i,
+				},
+			],
+			toProtocolUrl: "navigation/device_preferences",
+		} as DeepLink<"devicePreferences">,
+		{
 			name: "contacts",
 			protocolUrls: [
 				{
