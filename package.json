@@ -1,12 +1,20 @@
 {
 	"name": "roblox-deeplink-parser",
-	"version": "0.1.27",
+	"version": "0.1.28",
+	"type": "module",
 	"license": "MIT",
+	"homepage": "https://github.com/RoSeal-Extension/Roblox-DeepLink-Parsser",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/RoSeal-Extension/Roblox-DeepLink-Parser.git"
 	},
-	"type": "module",
+	"bugs": {
+		"url": "https://github.com/RoSeal-Extension/Roblox-DeepLink-Parser/issues"
+	},
+	"keywords": [
+		"roblox",
+		"deeplinks"
+	],
 	"files": [
 		"dist"
 	],
