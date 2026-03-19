@@ -79,3 +79,4 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/currency_transfer` <br />Search Parameters:<br />- direction (send|receive)<br />- transferRequestId<br />- transferOrigination<br />- userId | N/A | Opens the currency transfer page
 | `roblox://navigation/device_preferences` | N/A | Opens the device preferences page
 | `roblox://navigation/party`<br />Search Parameters:<br />- partyId<br />- chatId | N/A | Opens the party lobby page 
+| `roblox://open/lock_screen_widget` | N/A | Opens the Roblox app with signal that it came from a lock screen widget
