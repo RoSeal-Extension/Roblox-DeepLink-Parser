@@ -1,6 +1,6 @@
 {
 	"name": "@roseal/roblox-deeplink-parser",
-	"version": "0.1.28",
+	"version": "0.1.29",
 	"license": "MIT",
 	"exports": {
 		".": "./src/DeepLinkParser.ts",
