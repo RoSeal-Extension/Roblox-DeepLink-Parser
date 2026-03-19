@@ -1384,6 +1384,33 @@ export function getDeepLinks(
 			}
 		>,
 		{
+			name: "partyLobby",
+			protocolUrls: [
+				{
+					regex: /^navigation\/party$/i,
+					query: [
+						{
+							name: "partyId",
+							required: "primary",
+						},
+						{
+							name: "chatId",
+							required: "primary",
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/party",
+		} as DeepLink<
+			"partyLobby",
+			| {
+					partyId: string;
+			  }
+			| {
+					chatId: string;
+			  }
+		>,
+		{
 			name: "experienceDetails",
 			protocolUrls: [
 				{
