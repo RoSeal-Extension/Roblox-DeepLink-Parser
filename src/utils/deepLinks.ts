@@ -439,10 +439,15 @@ export function getDeepLinks(
 			protocolUrls: [
 				{
 					regex: /^open\/(?<source>lock_screen_widget)/,
+					path: [
+						{
+							name: "source",
+						},
+					],
 				},
 			],
 			arbitaryParameters: {
-				source: true,
+				source: "protocol",
 			},
 			toProtocolUrl: "open/{source}",
 		} as DeepLink<
@@ -831,7 +836,7 @@ export function getDeepLinks(
 				};
 			},
 			toWebsiteUrl: (data) => {
-				let url = `/groups/${data.groupId}`;
+				let url = `/communities/${data.groupId}`;
 				if (data.forumCategoryId && data.forumPostId && data.forumCommentId) {
 					url += `#!/forums/${data.forumCategoryId}/post/${data.forumPostId}/comment/${data.forumCommentId}`;
 				}

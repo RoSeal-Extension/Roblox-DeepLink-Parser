@@ -4,7 +4,7 @@ export const DEFAULT_ROBLOX_WEBSITE_URL = "www.roblox.com";
 export const DEFAULT_ROBLOX_API_DOMAIN = ".roblox.com";
 export const UUID_REGEX =
 	/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
-export const LOCALE_REGEX = /^[a-z]{2}(\-[a-z0-9]{2,3})?$/i;
+export const LOCALE_REGEX = /^[a-z]{2}(-[a-z0-9]{2,3})?$/i;
 
 export const DEFAULT_ROBLOX_PLAYER_AUTHED_PROTOCOL = "roblox-player";
 export const DEFAULT_ROBLOX_STUDIO_AUTHED_PROTOCOL = "roblox-studio";

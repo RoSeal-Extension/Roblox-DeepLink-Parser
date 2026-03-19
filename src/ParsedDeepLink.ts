@@ -31,7 +31,7 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 				? this._deepLink.toProtocolUrl(data.params)
 				: this._deepLink.toProtocolUrl;
 
-		const url = new URL(
+		let url = new URL(
 			`${this._deepLinkParser._urls.robloxPlayerDeepLinkProtocol}://${path}`,
 		);
 		const search = new URLSearchParams(url.search);
@@ -51,6 +51,9 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 			search.append(param, data.params[param as keyof typeof data.params]);
 		}
 
+		url = new URL(
+			`${this._deepLinkParser._urls.robloxPlayerDeepLinkProtocol}://${path}`,
+		);
 		url.search = search.toString();
 
 		return url.toString();
@@ -65,9 +68,7 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 				? this._deepLink.toWebsiteUrl(data.params)
 				: this._deepLink.toWebsiteUrl;
 
-		const url = new URL(
-			`https://${this._deepLinkParser._urls.robloxUrl}${path}`,
-		);
+		let url = new URL(`https://${this._deepLinkParser._urls.robloxUrl}${path}`);
 		const search = new URLSearchParams(url.search);
 
 		for (const param in data.params) {
@@ -84,6 +85,7 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 			search.append(param, data.params[param as keyof typeof data.params]);
 		}
 
+		url = new URL(`https://${this._deepLinkParser._urls.robloxUrl}${path}`);
 		url.search = search.toString();
 
 		return url.toString();
