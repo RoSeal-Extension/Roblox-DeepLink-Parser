@@ -353,8 +353,7 @@ export default class DeepLinkParser<
 					{
 						type: deepLink.name,
 						params,
-						// biome-ignore lint/suspicious/noExplicitAny: Fine
-					} as any,
+					} as ExtractParameterType<T>,
 					this as DeepLinkParser,
 				);
 			}
@@ -455,8 +454,7 @@ export default class DeepLinkParser<
 					{
 						type: deepLink.name,
 						params,
-						// biome-ignore lint/suspicious/noExplicitAny: Fine
-					} as any,
+					} as ExtractParameterType<T>,
 					this as DeepLinkParser,
 				);
 			}
