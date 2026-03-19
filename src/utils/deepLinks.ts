@@ -435,6 +435,23 @@ export function getDeepLinks(
 			}
 		>,
 		{
+			name: "openApp",
+			protocolUrls: [
+				{
+					regex: /^open\/(?<source>lock_screen_widget)/,
+				},
+			],
+			arbitaryParameters: {
+				source: true,
+			},
+			toProtocolUrl: "open/{source}",
+		} as DeepLink<
+			"openApp",
+			{
+				source: string;
+			}
+		>,
+		{
 			name: "crossDeviceLogin",
 			protocolUrls: [
 				{
