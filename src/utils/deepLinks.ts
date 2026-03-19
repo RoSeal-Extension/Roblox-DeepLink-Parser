@@ -1,6 +1,6 @@
 import { LOCALE_REGEX, UUID_REGEX } from "./constants";
 
-export type DeepLinkUrlQueryParameter<T extends string | number | symbol> = {
+export type DeepLinkUrlQueryParameter<T extends string> = {
 	regex?: RegExp;
 	required?: boolean | string;
 } & (
@@ -13,14 +13,14 @@ export type DeepLinkUrlQueryParameter<T extends string | number | symbol> = {
 	  }
 );
 
-export type DeepLinkUrlPathParameter<T extends string | number | symbol> = {
+export type DeepLinkUrlPathParameter<T extends string> = {
 	name: T;
 };
 
 export type DeepLinkUrl<T extends Record<string, unknown>> = {
 	regex: RegExp;
-	query?: DeepLinkUrlQueryParameter<keyof T>[];
-	path?: DeepLinkUrlPathParameter<keyof T>[];
+	query?: DeepLinkUrlQueryParameter<keyof T & string>[];
+	path?: DeepLinkUrlPathParameter<keyof T & string>[];
 };
 
 // biome-ignore lint/complexity/noBannedTypes: fine tbh
@@ -44,13 +44,6 @@ export type DeepLink<
 	toProtocolUrl?: ((params: W) => string) | string;
 	toWebsiteUrl?: ((params: W) => string) | string;
 };
-
-/*
-missing:
-roblox://open/lock_screen_widget
-
-... need to figure out how they work
-*/
 
 // we need a specific return type... so we need slow types
 export function getDeepLinks(
@@ -498,12 +491,14 @@ export function getDeepLinks(
 					],
 				},
 			],
+			arbitaryParameters: {
+				analyticId: "protocol",
+				ap: "website",
+			},
 			toWebsiteUrl: (params) =>
-				params.ap
-					? `/upgrades/paymentmethods?ap=${params.ap}`
-					: "/upgrades/robux",
+				params.ap ? "/upgrades/paymentmethods" : "/upgrades/robux",
 			toProtocolUrl: (params) =>
-				`navigation/buy_robux${params.ap ? `?product_id=${params.ap}` : ""}${params.analyticId ? `${params.ap ? "&" : "?"}analyticId=${params.analyticId}` : ""}`,
+				`navigation/buy_robux${params.ap ? `?product_id=${params.ap}` : ""}`,
 		} as DeepLink<
 			"buyRobux",
 			{

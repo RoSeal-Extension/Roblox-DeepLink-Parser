@@ -43,10 +43,10 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/contacts` <br />Search Parameters:<br />- contactId<br />- assetId<br />- avatarImageUrl | N/A | Open contacts page (or friend requests page)
 | `roblox://navigation/avatar_clothing_sort` | N/A | Open avatar clothing sorting page
 | `roblox://navigation/avatar_profile_picture_editor` | N/A | Open avatar profile picture editor page
-| `roblox://navigation/catalog` | `www.roblox.com/catalog` | Open avatar marketplace page
+| `roblox://navigation/catalog` <br />Search Parameters:<br />-  | `www.roblox.com/catalog` | Open avatar marketplace page
 | `roblox://navigation/catalog/equip` <br />Search Parameters:<br />- itemId<br />- itemType (Asset\|Bundle) | N/A | Equip or try on an avatar item
 | `roblox://navigation/friends` | `www.roblox.com/users/friends` | View the currently authenticated user's friends
-| `roblox://navigation/avatar` <br />Search Parameters:<br />- itemType (Character)<br />- itemId | `www.roblox.com/my/avatar` | Open the avatar editor page
+| `roblox://navigation/avatar` <br />Search Parameters:<br />- itemType (Character|Asset|Bundle)<br />- itemId | `www.roblox.com/my/avatar` | Open the avatar editor page
 | `roblox://navigation/more` | N/A | Open the More section of the app
 | `roblox://navigation/games` | `www.roblox.com/charts` | Open the charts page
 | `roblox://navigation/sort` <br />Search Parameters:<br />- sortName | `www.roblox.com/charts#/sortName/{sortId}` | Open the charts sort page
@@ -60,7 +60,6 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/game_details` <br />Search Parameters:<br />- gameId<br />- privateServerLinkCode | `www.roblox.com/games/{placeId}/name` <br />Search Parameters:<br />- privateServerLinkCode | Opens the details page of an experience
 | `roblox://navigation/security_alert` <br />Search Parameters:<br />- payload | `www.roblox.com/security-feedback` <br />Search Parameters:<br />- payload | Opens security feedback page
 | `roblox://navigation/experience_sort` <br />Search Parameters:<br />- sortId | N/A | Opens an experience sort page on the home page
-| `roblox://navigation/party` | N/A | Opens the party page
 | `roblox://navigation/app_permissions_settings` | `www.roblox.com/my/account#!/app-permissions` | Opens the app permissions page
 | `roblox://navigation/screentime_subsettings` | `www.roblox.com/my/account#!/privacy/Screentime` | Opens the screentime subsettings page
 | `roblox://navigation/blocked_experiences_subsettings` | `www.roblox.com/my/account#!/privacy/ContentRestrictions/BlockedExperiences` | Opens the blocked experiences subsettings page
@@ -72,10 +71,11 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/friends_contacts_subsettings` | `www.roblox.com/my/account#!/privacy/FriendsAndContacts` | Opens the friends and contacts subsettings page
 | `roblox://navigation/private_server_subsettings` | `www.roblox.com/my/account#!/privacy/PrivateServers` | Opens the private server subsettings page
 | `roblox://navigation/visibility_subsettings` | `www.roblox.com/my/account#!/privacy/Visibility` | Opens the visibility subsettings page
-| `roblox://navigation/fae` | N/A | Opens the facial age estimation page
-| `roblox://navigation/fae_upsell_overlay` | N/A | Opens the facial age estimation overlay page
+| `roblox://navigation/fae` <br />Search Parameters:<br />- source<br />- is_phase2 (true) | N/A | Opens the facial age estimation page
+| `roblox://navigation/fae_upsell_overlay` <br />Search Parameters:<br />- source | N/A | Opens the facial age estimation overlay
 | `roblox://navigation/account_recovery` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | `www.roblox.com/login/forgot-password-or-username` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | Opens the account recovery page
 | `roblox://navigation/messages` | `https://www.roblox.com/my/messages` | Opens the systen messages page
-| `roblox://navigation/buy_robux` | `https://www.roblox.com/upgrades/robux` | Opens the purchase Robux page
-| `roblox://navigation/currency_transfer` | N/A | Opens the currency transfer page
+| `roblox://navigation/buy_robux` <br />Search Parameters:<br />- product_id<br />- analyticId | `https://www.roblox.com/upgrades/robux` and `https://www.roblox.com/upgrades/paymentmethods?ap={product_id}` | Opens the purchase Robux page
+| `roblox://navigation/currency_transfer` <br />Search Parameters:<br />- direction (send|receive)<br />- transferRequestId<br />- transferOrigination<br />- userId | N/A | Opens the currency transfer page
 | `roblox://navigation/device_preferences` | N/A | Opens the device preferences page
+| `roblox://navigation/party`<br />Search Parameters:<br />- partyId<br />- chatId | N/A | Opens the party lobby page 

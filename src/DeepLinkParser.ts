@@ -1,12 +1,12 @@
 import ParsedDeepLink, { type ExtractParameterType } from "./ParsedDeepLink";
 import {
 	DEFAULT_APPSYFLYER_BASE_URL,
+	DEFAULT_ROBLOX_API_DOMAIN,
 	DEFAULT_ROBLOX_PLAYER_DEEPLINK_PROTOCOL,
 	DEFAULT_ROBLOX_WEBSITE_URL,
-	DEFAULT_ROBLOX_API_DOMAIN,
 	LOCALE_REGEX,
 } from "./utils/constants";
-import { getDeepLinks, type DeepLink } from "./utils/deepLinks";
+import { type DeepLink, getDeepLinks } from "./utils/deepLinks";
 
 export type DeepLinkParserUrls = {
 	appsFlyerBaseUrl: string;
@@ -26,7 +26,7 @@ export type DisallowedParams<
 > =
 	// biome-ignore lint/suspicious/noExplicitAny: A very strange typescript issue
 	T extends DeepLink<infer K, any, any, infer P>
-		? Record<K, Array<keyof P>>
+		? Record<K, Array<keyof P & string>>
 		: never;
 
 export type DeepLinkParserConstructorProps<
@@ -80,7 +80,7 @@ export default class DeepLinkParser<
 		if (data?.urls) {
 			for (const _key in data.urls) {
 				const key = _key as keyof DeepLinkParserUrls;
-				if (data.urls[key]) this._urls[key] = data.urls[key] as string;
+				if (data.urls[key]) this._urls[key] = data.urls[key];
 			}
 		}
 
@@ -125,8 +125,7 @@ export default class DeepLinkParser<
 				if (url.path) {
 					for (const path of url.path) {
 						if (params[path.name]) {
-							// @ts-expect-error: fine
-							validatedParams[path.name] = String(params[path.name]);
+							validatedParams[path.name] = params[path.name];
 						}
 					}
 				}
@@ -138,18 +137,17 @@ export default class DeepLinkParser<
 
 						// Track required parameters
 						if (query.required === true) {
-							requiredParams.add(String(paramName));
+							requiredParams.add(paramName);
 						}
 
 						// Validate and add parameter if it exists
 						if (params[paramName] !== undefined) {
-							const value = String(params[paramName]);
+							const value = params[paramName];
 							// Check regex pattern if available
 							if (query.regex && !query.regex.test(value)) {
 								continue;
 							}
 
-							// @ts-expect-error: fine
 							validatedParams[paramName] = value;
 						}
 					}
@@ -162,8 +160,7 @@ export default class DeepLinkParser<
 				if (url.path) {
 					for (const path of url.path) {
 						if (params[path.name]) {
-							// @ts-expect-error: fine
-							validatedParams[path.name] = String(params[path.name]);
+							validatedParams[path.name] = params[path.name];
 						}
 					}
 				}
@@ -173,17 +170,16 @@ export default class DeepLinkParser<
 							"mappedName" in query ? query.mappedName : query.name;
 
 						if (query.required === true) {
-							requiredParams.add(String(paramName));
+							requiredParams.add(paramName);
 						}
 
 						if (params[paramName] !== undefined) {
-							const value = String(params[paramName]);
+							const value = params[paramName];
 							// Check regex pattern if available
 							if (query.regex && !query.regex.test(value)) {
 								continue;
 							}
 
-							// @ts-expect-error: fine
 							validatedParams[paramName] = value;
 						}
 					}
@@ -196,14 +192,14 @@ export default class DeepLinkParser<
 				const allowed = deepLink.arbitaryParameters[paramName];
 
 				if (allowed && params[paramName] !== undefined) {
-					validatedParams[paramName] = String(params[paramName]);
+					validatedParams[paramName] = params[paramName];
 				}
 			}
 		}
 
 		if (this._disallowedParams?.[type]) {
 			for (const param of this._disallowedParams[type]) {
-				delete validatedParams[param as string];
+				delete validatedParams[param];
 			}
 		}
 
@@ -299,20 +295,25 @@ export default class DeepLinkParser<
 					}
 
 					for (const path of url.path) {
-						// @ts-expect-error: A very strange typescript issue
 						params[path.name] = match.groups?.[path.name];
 					}
 				}
 
 				if (url.query) {
 					for (const search of url.query) {
-						// @ts-expect-error: A very strange typescript issue
-						const value = searchParams.get(search.name);
+						let value: string | undefined;
+
+						const searchNameLowerCase = search.name.toLowerCase();
+						for (const [key, value2] of searchParams) {
+							if (key.toLowerCase() === searchNameLowerCase) {
+								value = value2;
+								break;
+							}
+						}
 						if (!value) {
 							if (
 								search.required === true ||
 								(typeof search.required === "string" &&
-									// @ts-expect-error: A very strange typescript issue
 									!requiredGroups.includes(search.name))
 							) {
 								passing = false;
@@ -326,7 +327,6 @@ export default class DeepLinkParser<
 							requiredGroups.push(search.required);
 						}
 
-						// @ts-expect-error: A very strange typescript issue
 						params["mappedName" in search ? search.mappedName : search.name] =
 							value;
 					}
@@ -345,7 +345,7 @@ export default class DeepLinkParser<
 
 				if (this._disallowedParams?.[deepLink.name]) {
 					for (const param of this._disallowedParams[deepLink.name]) {
-						delete params[param as string];
+						delete params[param];
 					}
 				}
 
@@ -399,20 +399,25 @@ export default class DeepLinkParser<
 					}
 
 					for (const path of url.path) {
-						// @ts-expect-error: A very strange typescript issue
 						params[path.name] = match.groups[path.name];
 					}
 				}
 
 				if (url.query) {
 					for (const search of url.query) {
-						// @ts-expect-error: A very strange typescript issue
-						const value = searchParams.get(search.name);
+						let value: string | undefined;
+						const searchNameLowerCase = search.name.toLowerCase();
+						for (const [key, value2] of searchParams) {
+							if (key.toLowerCase() === searchNameLowerCase) {
+								value = value2;
+								break;
+							}
+						}
+
 						if (!value) {
 							if (
 								search.required === true ||
 								(typeof search.required === "string" &&
-									// @ts-expect-error: A very strange typescript issue
 									!requiredGroups.includes(search.name))
 							) {
 								passing = false;
@@ -426,7 +431,6 @@ export default class DeepLinkParser<
 							requiredGroups.push(search.required);
 						}
 
-						// @ts-expect-error: A very strange typescript issue
 						params["mappedName" in search ? search.mappedName : search.name] =
 							value;
 					}
@@ -443,7 +447,7 @@ export default class DeepLinkParser<
 
 				if (this._disallowedParams?.[deepLink.name]) {
 					for (const param of this._disallowedParams[deepLink.name]) {
-						delete params[param as string];
+						delete params[param];
 					}
 				}
 
