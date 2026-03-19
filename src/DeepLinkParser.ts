@@ -130,6 +130,7 @@ export default class DeepLinkParser<
 						}
 					}
 				}
+
 				if (url.query) {
 					for (const query of url.query) {
 						const paramName =

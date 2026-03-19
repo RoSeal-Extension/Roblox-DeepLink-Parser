@@ -159,6 +159,11 @@ export function getDeepLinks(
 			protocolUrls: [
 				{
 					regex: /^navigation\/fae$/,
+					query: [
+						{
+							name: "source",
+						},
+					],
 				},
 			],
 			toProtocolUrl: "navigation/fae",
@@ -168,10 +173,27 @@ export function getDeepLinks(
 			protocolUrls: [
 				{
 					regex: /^navigation\/fae_upsell_overlay$/,
+					query: [
+						{
+							name: "source",
+						},
+						{
+							name: "is_phase2",
+							mappedName: "isPhase2",
+						},
+					],
 				},
 			],
-			toProtocolUrl: "navigation/fae_upsell_overlay",
-		} as DeepLink<"faeUpsellOverlay", EmptyObj, EmptyObj>,
+			toProtocolUrl: (params) =>
+				`navigation/fae_upsell_overlay${params.isPhase2 ? `?is_phase2=${params.isPhase2}` : ""}`,
+		} as DeepLink<
+			"faeUpsellOverlay",
+			{
+				source?: string;
+				isPhase2?: string;
+			},
+			EmptyObj
+		>,
 		{
 			name: "userContentPosts",
 			protocolUrls: [
@@ -220,7 +242,7 @@ export function getDeepLinks(
 					],
 				},
 				{
-					regex: /^navigation\/share_links\/(?<type>[^\/]+)\/(?<code>[^\/]+)$/i,
+					regex: /^navigation\/share_links\/(?<type>[^/]+)\/(?<code>[^/]+)$/i,
 					path: [
 						{
 							name: "type",
@@ -451,25 +473,77 @@ export function getDeepLinks(
 			protocolUrls: [
 				{
 					regex: /^navigation\/buy_robux$/i,
+					query: [
+						{
+							name: "analyticId",
+						},
+						{
+							name: "product_id",
+							mappedName: "ap",
+						},
+					],
 				},
 			],
 			websiteUrls: [
 				{
 					regex: /^\/upgrades\/robux$/i,
 				},
+				{
+					regex: /^\/upgrades\/paymentmethods$/i,
+					query: [
+						{
+							name: "ap",
+							required: true,
+						},
+					],
+				},
 			],
-			toWebsiteUrl: "/upgrades/robux",
-			toProtocolUrl: "navigation/buy_robux",
-		} as DeepLink<"buyRobux">,
+			toWebsiteUrl: (params) =>
+				params.ap
+					? `/upgrades/paymentmethods?ap=${params.ap}`
+					: "/upgrades/robux",
+			toProtocolUrl: (params) =>
+				`navigation/buy_robux${params.ap ? `?product_id=${params.ap}` : ""}${params.analyticId ? `${params.ap ? "&" : "?"}analyticId=${params.analyticId}` : ""}`,
+		} as DeepLink<
+			"buyRobux",
+			{
+				ap?: "string";
+				analyticId?: string;
+			}
+		>,
 		{
 			name: "currencyTransfer",
 			protocolUrls: [
 				{
 					regex: /^navigation\/currency_transfer$/i,
+					query: [
+						{
+							name: "direction",
+							regex: /^(send|receive)$/,
+							required: true,
+						},
+						{
+							name: "transferRequestId",
+						},
+						{
+							name: "transferOrigination",
+						},
+						{
+							name: "userId",
+							regex: /^\d+$/,
+						},
+					],
 				},
 			],
 			toProtocolUrl: "navigation/currency_transfer",
-		} as DeepLink<"currencyTransfer">,
+		} as DeepLink<
+			"currencyTransfer",
+			{
+				direction: "send" | "receive";
+				transferRequestId: string;
+				transferOrigination: string;
+			}
+		>,
 		{
 			name: "devicePreferences",
 			protocolUrls: [
@@ -531,16 +605,115 @@ export function getDeepLinks(
 			protocolUrls: [
 				{
 					regex: /^navigation\/catalog$/i,
+					query: [
+						{
+							name: "creatorName",
+						},
+						{
+							name: "minPrice",
+						},
+						{
+							name: "maxPrice",
+						},
+						{
+							name: "salesTypeFilter",
+						},
+						{
+							name: "includeNotForSale",
+						},
+						{
+							name: "sortType",
+						},
+						{
+							name: "sortAggregation",
+						},
+						{
+							name: "category",
+						},
+						{
+							name: "subcategory",
+						},
+						{
+							name: "taxonomy",
+						},
+						{
+							name: "keyword",
+						},
+						{
+							name: "topics",
+						},
+						{
+							name: "wearTimeFilter",
+						},
+					],
 				},
 			],
 			websiteUrls: [
 				{
 					regex: /^\/catalog$/i,
+					query: [
+						{
+							name: "creatorName",
+						},
+						{
+							name: "minPrice",
+						},
+						{
+							name: "maxPrice",
+						},
+						{
+							name: "salesTypeFilter",
+						},
+						{
+							name: "includeNotForSale",
+						},
+						{
+							name: "sortType",
+						},
+						{
+							name: "sortAggregation",
+						},
+						{
+							name: "category",
+						},
+						{
+							name: "subcategory",
+						},
+						{
+							name: "taxonomy",
+						},
+						{
+							name: "topics",
+						},
+						{
+							name: "wearTimeFilter",
+						},
+						{
+							name: "keyword",
+						},
+					],
 				},
 			],
 			toWebsiteUrl: "/catalog",
 			toProtocolUrl: "navigation/catalog",
-		} as DeepLink<"avatarMarketplace">,
+		} as DeepLink<
+			"avatarMarketplace",
+			{
+				creatorName?: string;
+				minPrice?: string;
+				maxPrice?: string;
+				salesTypeFilter?: string;
+				includeNotForSale?: string;
+				sortType?: string;
+				sortAggregation?: string;
+				category?: string;
+				subcategory?: string;
+				taxonomy?: string;
+				topics?: string;
+				wearTimeFilter?: string;
+				keyword?: string;
+			}
+		>,
 		{
 			name: "userFriends",
 			protocolUrls: [
@@ -673,7 +846,8 @@ export function getDeepLinks(
 			name: "userProfile",
 			protocolUrls: [
 				{
-					regex: /^navigation\/profile(?<isProfileCard>_card)?$/i,
+					regex:
+						/^navigation\/profile((?<isProfileCard>_card)|(?<isTrustedFriendModal>_trustedfriends))?$/i,
 					query: [
 						{
 							name: "userId",
@@ -687,6 +861,9 @@ export function getDeepLinks(
 					path: [
 						{
 							name: "isProfileCard",
+						},
+						{
+							name: "isTrustedFriendModal",
 						},
 					],
 				},
@@ -706,16 +883,18 @@ export function getDeepLinks(
 			],
 			arbitaryParameters: {
 				isProfileCard: "website",
+				isTrustedFriendModal: "website",
 				userId: "protocol",
 			},
 			toWebsiteUrl: "/users/{userId}/profile",
 			toProtocolUrl: (params) =>
-				`navigation/profile${params.isProfileCard ? "_card" : ""}`,
+				`navigation/profile${params.isProfileCard ? "_card" : ""}${params.isTrustedFriendModal ? "_trustedfriends" : ""}`,
 		} as DeepLink<
 			"userProfile",
 			{
 				userId: string;
 				isProfileCard?: string;
+				isTrustedFriendModal?: string;
 				friendshipSourceType?: string;
 			},
 			{

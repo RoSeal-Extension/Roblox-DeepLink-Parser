@@ -1,17 +1,13 @@
 import type DeepLinkParser from "./DeepLinkParser";
 import type { DeepLink } from "./utils/deepLinks";
 
-export type ExtractParameterType<T> = T extends DeepLink<
-	infer U,
-	infer _V,
-	infer _W,
-	infer X
->
-	? {
-			type: U;
-			params: X;
-		}
-	: never;
+export type ExtractParameterType<T> =
+	T extends DeepLink<infer U, infer _V, infer _W, infer X>
+		? {
+				type: U;
+				params: X;
+			}
+		: never;
 
 export default class ParsedDeepLink<T extends DeepLink<string>> {
 	private _deepLink: T;
@@ -48,6 +44,7 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 				);
 				continue;
 			}
+
 			search.append(param, data.params[param as keyof typeof data.params]);
 		}
 
