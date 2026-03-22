@@ -85,7 +85,8 @@ export type BuildAuthedPlaceLauncherRequest =
 	| "RequestPlayWithParty"
 	| "CheckGameJobStatus"
 	| "RequestReservedGame"
-	| "RequestCrossExpVoice";
+	| "RequestCrossExpVoice"
+	| "RequestPrivatePartyGame";
 
 export type AuthedPrivateGameMode = "ReservedServer";
 
