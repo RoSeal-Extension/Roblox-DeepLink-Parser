@@ -1425,7 +1425,7 @@ export function getDeepLinks(
 			name: "ssoLogin",
 			protocolUrls: [
 				{
-					regex: /^(signle-sign-on\/login)?$/i,
+					regex: /^(single-sign-on\/login)?$/i,
 					query: [
 						{
 							name: "baseUrl",
