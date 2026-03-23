@@ -80,3 +80,7 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/device_preferences` | N/A | Opens the device preferences page
 | `roblox://navigation/party`<br />Search Parameters:<br />- partyId<br />- chatId | N/A | Opens the party lobby page 
 | `roblox://open/lock_screen_widget` | N/A | Opens the Roblox app with signal that it came from a lock screen widget
+| `roblox://navigation/share_links/{type}/{code}` | `www.roblox.com/share-links` <br />Search Parameters:<br />- type<br />- code | Resolve a static share link
+| `roblox://testing/preauth` | N/A | Testing deeplink, will print to console all the search parameters it is given
+| `roblox://join_v2/join`<br />Search Parameters:<br />- ticket<br />- placelauncherurl | N/A | Opens a page that will authenticate with the auth ticket and extract data from the place launcher url to join the experience
+| `roblox://single-sign-on/login`<br />Search Parameters:<br />- baseUrl<br />- auth<br />- placeId | N/A | Opens SSO login page supposedly
