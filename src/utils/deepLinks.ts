@@ -219,6 +219,29 @@ export function getDeepLinks(
 			}
 		>,
 		{
+			name: "resolveStaticShareLink",
+			protocolUrls: [
+				{
+					regex: /^navigation\/share_links\/(?<type>\w)\/(?<code>\w+)$/i,
+					path: [
+						{
+							name: "type",
+						},
+						{
+							name: "code",
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/share_links/{type}/{code}",
+		} as DeepLink<
+			"resolveStaticShareLink",
+			{
+				type: string;
+				code: string;
+			}
+		>,
+		{
 			name: "resolveShareLink",
 			protocolUrls: [
 				{
@@ -231,17 +254,6 @@ export function getDeepLinks(
 						{
 							name: "code",
 							required: true,
-						},
-					],
-				},
-				{
-					regex: /^navigation\/share_links\/(?<type>[^/]+)\/(?<code>[^/]+)$/i,
-					path: [
-						{
-							name: "type",
-						},
-						{
-							name: "code",
 						},
 					],
 				},
@@ -1398,6 +1410,68 @@ export function getDeepLinks(
 				referredByPlayerId?: string;
 				eventId?: string;
 				isoContext?: string;
+			}
+		>,
+		{
+			name: "preAuthTest",
+			protocolUrls: [
+				{
+					regex: /^(testing\/preauth)?$/i,
+				},
+			],
+			toProtocolUrl: "testing/preauth",
+		} as DeepLink<"preAuthTest">,
+		{
+			name: "ssoLogin",
+			protocolUrls: [
+				{
+					regex: /^(signle-sign-on\/login)?$/i,
+					query: [
+						{
+							name: "baseUrl",
+							regex: /^\d+$/,
+						},
+						{
+							name: "auth",
+							regex: /^\d+$/,
+						},
+						{
+							name: "placeId",
+							regex: /^\d+$/,
+						},
+					],
+				},
+			],
+			toProtocolUrl: "single-sign-on/login",
+		} as DeepLink<
+			"ssoLogin",
+			{
+				baseUrl?: string;
+				auth?: string;
+				placeId?: string;
+			}
+		>,
+		{
+			name: "preAuthJoin",
+			protocolUrls: [
+				{
+					regex: /^(join_v2\/join)?$/i,
+					query: [
+						{
+							name: "ticket",
+						},
+						{
+							name: "placelauncherurl",
+						},
+					],
+				},
+			],
+			toProtocolUrl: "join_v2/join",
+		} as DeepLink<
+			"preAuthJoin",
+			{
+				ticket?: string;
+				placelauncherurl?: string;
 			}
 		>,
 		{
