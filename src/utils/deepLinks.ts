@@ -1433,7 +1433,7 @@ export function getDeepLinks(
 						},
 						{
 							name: "auth",
-							regex: /^\d+$/,
+							regex: /^\w+$/,
 						},
 						{
 							name: "placeId",
