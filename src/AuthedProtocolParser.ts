@@ -108,7 +108,7 @@ export type BuildAuthedPlaceLauncherURLParameters<T extends string> = {
 	conversationId?: number;
 	isPartyLeader?: boolean;
 	isTeleport?: boolean;
-	partyGuid?: string;
+	partyId?: string;
 	isPlayTogetherGame?: boolean;
 	joinAttemptId?: string;
 	joinAttemptOrigin?: T;
