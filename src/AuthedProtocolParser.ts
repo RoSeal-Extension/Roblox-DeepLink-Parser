@@ -117,6 +117,7 @@ export type BuildAuthedPlaceLauncherURLParameters<T extends string> = {
 	eventId?: string;
 	isolationContext?: string;
 	gameJoinContext?: string;
+	isPrivateParty?: boolean;
 	userId?: number;
 };
 
