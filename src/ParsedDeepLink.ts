@@ -40,15 +40,15 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 			const check = this._deepLink.arbitaryParameters?.[param];
 			if (check && check !== "protocol") continue;
 
+			const val = data.params[param as keyof typeof data.params];
+			if (val === undefined) continue;
+
 			if (path.includes(`{${param}}`)) {
-				path = path.replace(
-					`{${param}}`,
-					data.params[param as keyof typeof data.params],
-				);
+				path = path.replace(`{${param}}`, val);
 				continue;
 			}
 
-			search.append(param, data.params[param as keyof typeof data.params]);
+			search.append(param, val);
 		}
 
 		url = new URL(
@@ -77,14 +77,15 @@ export default class ParsedDeepLink<T extends DeepLink<string>> {
 			const check = this._deepLink.arbitaryParameters?.[param];
 			if (check && check !== "website") continue;
 
+			const val = data.params[param as keyof typeof data.params];
+
+			if (val === undefined) continue;
+
 			if (path.includes(`{${param}}`)) {
-				path = path.replace(
-					`{${param}}`,
-					data.params[param as keyof typeof data.params],
-				);
+				path = path.replace(`{${param}}`, val);
 				continue;
 			}
-			search.append(param, data.params[param as keyof typeof data.params]);
+			search.append(param, val);
 		}
 
 		url.pathname = path;
