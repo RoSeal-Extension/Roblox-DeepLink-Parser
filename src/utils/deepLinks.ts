@@ -1044,6 +1044,99 @@ export function getDeepLinks(
 			toProtocolUrl: "navigation/games",
 		} as DeepLink<"charts">,
 		{
+			name: "search",
+			protocolUrls: [
+				{
+					regex: /^navigation\/search$/i,
+					query: [
+						{
+							name: "type",
+							regex: /^(players|topresults|games)$/i,
+						},
+						{
+							name: "keyword",
+						},
+					],
+				},
+			],
+			websiteUrls: [
+				{
+					regex: /^\/search\/users$/i,
+					query: [
+						{
+							name: "keyword",
+						},
+					],
+				},
+				{
+					regex: /^\/discover$/i,
+					query: [
+						{
+							name: "keyword",
+						},
+					],
+				},
+			],
+			arbitaryParameters: {
+				type: "protocol",
+			},
+			transformWebsiteParams: (data, url) => ({
+				type: url.pathname.includes("/search/users") ? "players" : "games",
+				keyword: data.keyword,
+			}),
+			toWebsiteUrl: (data) =>
+				data.type === "players" ? "/search/users" : "/discover",
+			toProtocolUrl: "navigation/search",
+		} as DeepLink<
+			"search",
+			{
+				type: "players" | "topresults" | "games";
+				keyword: string;
+			},
+			{
+				keyword: string;
+			}
+		>,
+		{
+			name: "ampWizard",
+			protocolUrls: [
+				{
+					regex: /^navigation\/amp_wizard$/i,
+					query: [
+						{
+							name: "namespace",
+							required: true,
+						},
+						{
+							name: "feature_name",
+							mappedName: "featureName",
+							required: true,
+						},
+						{
+							name: "entry_point",
+							mappedName: "entryPoint",
+						},
+						{
+							name: "returnPage",
+						},
+					],
+				},
+			],
+			arbitaryParameters: {
+				featureName: true,
+			},
+			toProtocolUrl: (params) =>
+				`navigation/amp_wizard?featureName=${params.featureName}${params.entryPoint ? `&entryPoint=${params.entryPoint}` : ""}`,
+		} as DeepLink<
+			"ampWizard",
+			{
+				namespace: string;
+				featureName: string;
+				entryPoint?: string;
+				returnPage?: string;
+			}
+		>,
+		{
 			name: "itemDetails",
 			protocolUrls: [
 				{

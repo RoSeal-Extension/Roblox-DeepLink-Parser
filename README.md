@@ -84,3 +84,5 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://testing/preauth` | N/A | Testing deeplink, will print to console all the search parameters it is given
 | `roblox://join_v2/join`<br />Search Parameters:<br />- ticket<br />- placelauncherurl | N/A | Opens a page that will authenticate with the auth ticket and extract data from the place launcher url to join the experience
 | `roblox://single-sign-on/login`<br />Search Parameters:<br />- baseUrl<br />- auth<br />- placeId | N/A | Opens SSO login page supposedly
+| `roblox://navigation/search`<br />Search Parameters:<br />- type<br />- keyword | https://www.roblox.com/discover?Keyword={keyword}<br />https://www.roblox.com/search/users?keyword={keyword} | Opens search page
+| `roblox://navigation/amp_wizard`<br />Search Parameters:<br />- namespace<br />- feature_name<br />- entry_point<br />- returnpage | N/A | Opens AMP wizard modal
