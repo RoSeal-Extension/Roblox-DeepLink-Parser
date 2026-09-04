@@ -71,6 +71,7 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/friends_contacts_subsettings` | `www.roblox.com/my/account#!/privacy/FriendsAndContacts` | Opens the friends and contacts subsettings page
 | `roblox://navigation/private_server_subsettings` | `www.roblox.com/my/account#!/privacy/PrivateServers` | Opens the private server subsettings page
 | `roblox://navigation/visibility_subsettings` | `www.roblox.com/my/account#!/privacy/Visibility` | Opens the visibility subsettings page
+| `roblox://navigation/robux_settings` | `www.roblox.com/my/account#!/robux` | Opens the Robux settings page
 | `roblox://navigation/fae` <br />Search Parameters:<br />- source<br />- is_phase2 (true) | N/A | Opens the facial age estimation page
 | `roblox://navigation/fae_upsell_overlay` <br />Search Parameters:<br />- source | N/A | Opens the facial age estimation overlay
 | `roblox://navigation/account_recovery` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | `www.roblox.com/login/forgot-password-or-username` <br />Search Parameters:<br />- origin<br />- username<br />- recoverySessionId | Opens the account recovery page
@@ -79,10 +80,23 @@ parser.parseWebsiteLink("https://www.roblox.com/my/avatar");
 | `roblox://navigation/currency_transfer` <br />Search Parameters:<br />- direction (send|receive)<br />- transferRequestId<br />- transferOrigination<br />- userId | N/A | Opens the currency transfer page
 | `roblox://navigation/device_preferences` | N/A | Opens the device preferences page
 | `roblox://navigation/party`<br />Search Parameters:<br />- partyId<br />- chatId | N/A | Opens the party lobby page 
-| `roblox://open/lock_screen_widget` | N/A | Opens the Roblox app with signal that it came from a lock screen widget
+| `roblox://open/lock_screen_widget`<br />Search Parameters:<br />- entry_point | N/A | Opens the Roblox app with signal that it came from a lock screen widget
+| `roblox://open/widget`<br />Search Parameters:<br />- entry_point | N/A | Opens the Roblox app with signal that it came from a home screen widget
 | `roblox://navigation/share_links/{type}/{code}` | `www.roblox.com/share-links` <br />Search Parameters:<br />- type<br />- code | Resolve a static share link
 | `roblox://testing/preauth` | N/A | Testing deeplink, will print to console all the search parameters it is given
 | `roblox://join_v2/join`<br />Search Parameters:<br />- ticket<br />- placelauncherurl | N/A | Opens a page that will authenticate with the auth ticket and extract data from the place launcher url to join the experience
 | `roblox://single-sign-on/login`<br />Search Parameters:<br />- baseUrl<br />- auth<br />- placeId | N/A | Opens SSO login page supposedly
 | `roblox://navigation/search`<br />Search Parameters:<br />- type<br />- keyword | https://www.roblox.com/discover?Keyword={keyword}<br />https://www.roblox.com/search/users?keyword={keyword} | Opens search page
 | `roblox://navigation/amp_wizard`<br />Search Parameters:<br />- namespace<br />- feature_name<br />- entry_point<br />- returnpage | N/A | Opens AMP wizard modal
+| `roblox://navigation/moments`<br />Search Parameters:<br />- feedItemId | N/A | Opens Roblox moments
+| `roblox://navigation/account_unlock`<br />Search Parameters:<br />- user_id | N/A | Opens account unlock menu for a user
+| `roblox://navigation/landing`<br />Search Parameters:<br />- page | N/A | Opens navigation landing
+| `roblox://navigation/genre`<br />Search Parameters:<br />- sortId<br />- page | N/A | Opens a charts genre page
+| `roblox://navigation/launch_destination` | N/A | Unknown usage
+| `roblox://navigation/avatar_profile_frames`<br />Search Parameters:<br />- profileFrameAssetId | N/A | Opens a profile frame details page
+| `roblox://navigation/avatar_background_generation` | N/A | Opens avatar background AI generation page
+| `roblox://navigation/build`<br />Search Parameters:<br />- universeId<br />- sessionId | N/A | Opens Roblox build page
+| `roblox://navigation/add_school`<br />Search Parameters:<br />- source | N/A | Opens page to add your school email
+| `roblox://navigation/plus_upsell` | N/A | Opens plus upsell page
+| `roblox://navigation/support_center`<br />Search Parameters:<br />- universeId<br />- sessionId | `www.roblox.com/support-center#!/tickets/{universeId}/{ticketId}`
+| `roblox://navigation/notifications` | N/A | Opens notifications widget
