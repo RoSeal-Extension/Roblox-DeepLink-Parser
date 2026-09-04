@@ -101,6 +101,44 @@ export function getDeepLinks(
 			}
 		>,
 		{
+			name: "robloxMoments",
+			protocolUrls: [
+				{
+					regex: /^navigation\/moments$/i,
+					query: [
+						{
+							name: "feedItemId",
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/moments",
+		} as DeepLink<"robloxMoments", { feedItemId?: string }>,
+		{
+			name: "accountUnlock",
+			protocolUrls: [
+				{
+					regex: /^navigation\/account_unlock$/i,
+					query: [
+						{
+							name: "user_id",
+							mappedName: "userId",
+						},
+					],
+				},
+			],
+			arbitaryParameters: {
+				userId: true,
+			},
+			toProtocolUrl: (data) =>
+				`navigation/account_unlock${data.userId ? `?user_id=${data.userId}` : ""}`,
+		} as DeepLink<
+			"accountUnlock",
+			{
+				userId?: string;
+			}
+		>,
+		{
 			name: "accountRecovery",
 			protocolUrls: [
 				{
@@ -108,6 +146,7 @@ export function getDeepLinks(
 					query: [
 						{
 							name: "origin",
+							regex: /^(passwordReset2SV|login2SV)$/i,
 						},
 						{
 							name: "username",
@@ -122,6 +161,7 @@ export function getDeepLinks(
 					query: [
 						{
 							name: "origin",
+							regex: /^(passwordReset2SV|login2SV)$/i,
 						},
 						{
 							name: "username",
@@ -137,12 +177,12 @@ export function getDeepLinks(
 		} as DeepLink<
 			"accountRecovery",
 			{
-				origin?: string;
+				origin?: "passwordReset2SV" | "login2SV";
 				username?: string;
 				recoverySessionId?: string;
 			},
 			{
-				origin?: string;
+				origin?: "passwordReset2SV" | "login2SV";
 				username?: string;
 				recoverySessionId?: string;
 			}
@@ -450,24 +490,78 @@ export function getDeepLinks(
 			name: "openApp",
 			protocolUrls: [
 				{
-					regex: /^open\/(?<source>lock_screen_widget)/,
+					regex: /^open\/(?<source>lock_screen_widget|widget)/,
 					path: [
 						{
 							name: "source",
+						},
+					],
+					query: [
+						{
+							name: "entry_point",
+							mappedName: "entryPoint",
 						},
 					],
 				},
 			],
 			arbitaryParameters: {
 				source: "protocol",
+				mappedName: true,
 			},
-			toProtocolUrl: "open/{source}",
+			toProtocolUrl: (params) =>
+				`open/${params.source}${params.entryPoint ? `?entry_point=${params.entryPoint}` : ""}`,
 		} as DeepLink<
 			"openApp",
 			{
 				source: string;
+				entryPoint?: string;
 			}
 		>,
+		{
+			name: "navigationLanding",
+			protocolUrls: [
+				{
+					regex: /^navigation\/landing$/i,
+					query: [
+						{
+							name: "page",
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/landing",
+		} as DeepLink<
+			"navigationLanding",
+			{
+				page?: string;
+			}
+		>,
+		{
+			name: "chartsGenre",
+			protocolUrls: [
+				{
+					regex: /^navigation\/genre$/i,
+					query: [
+						{
+							name: "sortId",
+						},
+						{
+							name: "page",
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/genre",
+		} as DeepLink<"chartsGenre">,
+		{
+			name: "launchDestination",
+			protocolUrls: [
+				{
+					regex: /^navigation\/launch_destination$/i,
+				},
+			],
+			toProtocolUrl: "navigation/launch_destination",
+		} as DeepLink<"launchDestination">,
 		{
 			name: "crossDeviceLogin",
 			protocolUrls: [
@@ -493,6 +587,60 @@ export function getDeepLinks(
 			EmptyObj,
 			{
 				code?: string;
+			}
+		>,
+		{
+			name: "avatarProfileFrames",
+			protocolUrls: [
+				{
+					regex: /^navigation\/avatar_profile_frames$/i,
+					query: [
+						{
+							name: "profileFrameAssetId",
+							regex: /^\d+$/,
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/avatar_profile_frames",
+		} as DeepLink<
+			"avatarProfileFrames",
+			{
+				profileFrameAssetId?: string;
+			}
+		>,
+		{
+			name: "avatarProfileBackgroundGeneration",
+			protocolUrls: [
+				{
+					regex: /^navigation\/avatar_background_generation$/i,
+				},
+			],
+			toProtocolUrl: "navigation/avatar_background_generation",
+		} as DeepLink<"avatarProfileBackgroundGeneration">,
+		{
+			name: "build",
+			protocolUrls: [
+				{
+					regex: /^navigation\/build$/i,
+					query: [
+						{
+							name: "universeId",
+							regex: /^\d+$/,
+						},
+						{
+							name: "sessionId",
+							regex: /^[\w-]+$/,
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/build",
+		} as DeepLink<
+			"build",
+			{
+				universeId?: string;
+				sessionId?: string;
 			}
 		>,
 		{
@@ -538,6 +686,81 @@ export function getDeepLinks(
 			{
 				ap?: "string";
 				analyticId?: string;
+			}
+		>,
+		{
+			name: "addSchoolLink",
+			protocolUrls: [
+				{
+					regex: /^navigation\/add_school$/i,
+					query: [
+						{
+							name: "source",
+						},
+					],
+				},
+			],
+			toProtocolUrl: "navigation/add_school",
+		} as DeepLink<
+			"addSchoolLink",
+			{
+				source?: string;
+			}
+		>,
+		{
+			name: "robloxSubscriptionUpsell",
+			protocolUrls: [
+				{
+					regex: /^navigation\/plus_upsell$/i,
+				},
+			],
+			toProtocolUrl: "navigation/plus_upsell",
+		} as DeepLink<"robloxSubscriptionUpsell">,
+		{
+			name: "supportCenter",
+			protocolUrls: [
+				{
+					regex: /^navigation\/support_center$/i,
+					query: [
+						{
+							name: "universeId",
+							regex: /^\d+$/,
+						},
+						{
+							name: "ticketId",
+						},
+					],
+				},
+			],
+			websiteUrls: [
+				{
+					regex: /^\/support-center$/i,
+				},
+			],
+			arbitaryParameters: {
+				universeId: "protocol",
+				ticketId: "protocol",
+			},
+			transformWebsiteParams: (_, url) => {
+				const hashSearch = url.hash.split("/");
+
+				return {
+					universeId: hashSearch[2],
+					ticketId: hashSearch[3],
+				};
+			},
+			toProtocolUrl: "navigation/support_center",
+			toWebsiteUrl: (data) =>
+				`/support-center${data.universeId && data.ticketId ? `#/tickets/${data.universeId}/${data.ticketId}` : ""}`,
+		} as DeepLink<
+			"supportCenter",
+			{
+				universeId?: string;
+				ticketId?: string;
+			},
+			{
+				universeId?: string;
+				ticketId?: string;
 			}
 		>,
 		{
@@ -1200,7 +1423,7 @@ export function getDeepLinks(
 			protocolUrls: [
 				{
 					regex:
-						/^navigation\/(?<tabId>notification_settings|account_info|privacy_settings|parental_controls|spending_settings|app_permissions_settings|screentime_subsettings|blocked_experiences_subsettings|blocked_users_subsettings|experience_chat_subsettings|party_subsettings|voice_subsettings|trading_inventory_subsettings|private_server_subsettings|friends_contacts_subsettings|visibility_subsettings)$/i,
+						/^navigation\/(?<tabId>notification_settings|account_info|privacy_settings|parental_controls|spending_settings|app_permissions_settings|screentime_subsettings|blocked_experiences_subsettings|blocked_users_subsettings|experience_chat_subsettings|party_subsettings|voice_subsettings|trading_inventory_subsettings|private_server_subsettings|friends_contacts_subsettings|visibility_subsettings|robux_settings)$/i,
 					path: [
 						{
 							name: "tabId",
@@ -1250,6 +1473,8 @@ export function getDeepLinks(
 					tabId = "private_server_subsettings";
 				} else if (hash === "privacy/VisibilityAndPrivateServers/Visibility") {
 					tabId = "visibility_subsettings";
+				} else if (hash === "robux") {
+					tabId = "robux_settings";
 				}
 
 				return {
@@ -1292,6 +1517,8 @@ export function getDeepLinks(
 					url += "#!/privacy/VisibilityAndPrivateServers/PrivateServerPrivacy";
 				} else if (params.tabId === "visibility_subsettings") {
 					url += "#!/privacy/VisibilityAndPrivateServers/Visibility";
+				} else if (params.tabId === "robux_settings") {
+					url += "#!/robux";
 				} else {
 					url += "#!/info";
 				}
@@ -1307,6 +1534,15 @@ export function getDeepLinks(
 				tabId?: string;
 			}
 		>,
+		{
+			name: "notifications",
+			protocolUrls: [
+				{
+					regex: /^navigation\/notifications$/i,
+				},
+			],
+			toProtocolUrl: "navigation/notifications",
+		} as DeepLink<"notifications">,
 		{
 			name: "joinUser",
 			protocolUrls: [
